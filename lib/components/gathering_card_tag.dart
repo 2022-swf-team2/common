@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class HomeScreenGatheringCardTag extends StatelessWidget {
+class GatheringCardTag extends StatelessWidget {
   final List<String> tagList;
-  const HomeScreenGatheringCardTag({
+  const GatheringCardTag({
     Key? key,
     required this.tagList,
   }) : super(key: key);

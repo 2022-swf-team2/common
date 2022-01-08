@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class HomeScreenGatheringCardInfo extends StatelessWidget {
+class GatheringCardInfo extends StatelessWidget {
   final String content;
   final IconData icon;
-  const HomeScreenGatheringCardInfo({
+  const GatheringCardInfo({
     Key? key,
     required this.content,
     required this.icon,

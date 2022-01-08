@@ -1,4 +1,6 @@
+import 'package:common/screens/category/category_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants.dart';
 
@@ -12,22 +14,27 @@ class HomeScreenCategoryArea extends StatelessWidget {
       shrinkWrap: true,
       crossAxisCount: 5,
       children: kCategoryList.map((Map<String, dynamic> category) {
-        return Container(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                category['icon'],
-                color: kCategoryGreyColor,
-              ),
-              Text(
-                category['title'],
-                style: const TextStyle(
+        return InkWell(
+          onTap: () {
+            Get.to(() => CategoryScreen(category: category['title']));
+          },
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  category['icon'],
                   color: kCategoryGreyColor,
                 ),
-              ),
-            ],
+                Text(
+                  category['title'],
+                  style: const TextStyle(
+                    color: kCategoryGreyColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }).toList(),
