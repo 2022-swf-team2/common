@@ -1,9 +1,11 @@
+import 'package:common/models/applicant.dart';
+
 import 'host.dart';
 
 class Gathering {
   final String id;
   final Host host;
-  final bool over;//이 모임이 터졌나 확인하기위한 bool값 false가 기본값, true가 되면 모임터진거임
+  final bool over; //이 모임이 터졌나 확인하기위한 bool값 false가 기본값, true가 되면 모임터진거임
   final String title;
   final String category;
   final int participant;
@@ -15,6 +17,9 @@ class Gathering {
   final String hostMessage;
   final List<String> tagList;
   final List<String> previousImageList;
+  final List<Applicant> applyList;
+  final List<Applicant> approvalList;
+  final List<Applicant> cancelList;
 
   Gathering({
     required this.id,
@@ -31,6 +36,9 @@ class Gathering {
     required this.hostMessage,
     required this.tagList,
     required this.previousImageList,
+    required this.applyList,
+    required this.approvalList,
+    required this.cancelList,
   });
 
   factory Gathering.fromJson(Map<String, dynamic> json) => Gathering(
@@ -48,24 +56,43 @@ class Gathering {
         hostMessage: json['hostMessage'],
         tagList: json['tagList'],
         previousImageList: json['previousImageList'],
+        applyList: json['applyList'].map((Map<String, dynamic> applicant) {
+          return Applicant.fromJson(applicant);
+        }).toList,
+        approvalList:
+            json['approvalList'].map((Map<String, dynamic> applicant) {
+          return Applicant.fromJson(applicant);
+        }).toList,
+        cancelList: json['cancelList'].map((Map<String, dynamic> applicant) {
+          return Applicant.fromJson(applicant);
+        }).toList,
       );
 
   Map<String, dynamic> toMap() {
     return {
-      'id':id,
-      'host':host.toMap(),
-      'over':over,
-      'title':title,
-      'category':category,
-      'participant':participant,
-      'capacity':capacity,
-      'openTime':openTime,
-      'endTime':endTime,
-      'location':location,
-      'locationDetail':locationDetail,
-      'hostMessage':hostMessage,
-      'tagList':tagList,
-      'previousImageList':previousImageList,
+      'id': id,
+      'host': host.toMap(),
+      'over': over,
+      'title': title,
+      'category': category,
+      'participant': participant,
+      'capacity': capacity,
+      'openTime': openTime,
+      'endTime': endTime,
+      'location': location,
+      'locationDetail': locationDetail,
+      'hostMessage': hostMessage,
+      'tagList': tagList,
+      'previousImageList': previousImageList,
+      'applyList':applyList.map((Applicant applicant){
+        return applicant.toMap();
+      }).toList(),
+      'approvalList':approvalList.map((Applicant applicant){
+        return applicant.toMap();
+      }).toList(),
+      'cancelList':cancelList.map((Applicant applicant){
+        return applicant.toMap();
+      }).toList(),
     };
   }
 }
