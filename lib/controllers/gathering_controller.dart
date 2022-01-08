@@ -7,6 +7,10 @@ class GatheringController extends GetxController {
 
   List<Gathering> _gatheringList = [];
   List<Gathering> get gatheringList => _gatheringList;
+
+  List<Gathering> _categoryGatheringList = [];
+  List<Gathering> get categoryGatheringList => _categoryGatheringList;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -21,6 +25,7 @@ class GatheringController extends GetxController {
           job: '컴퓨터공학',
           userTagList: ['성실', '열정', '책임감', '개발', '플러터'],
         ),
+        over: false,
         title: 'Flutter 공부할사람 구해요!!',
         category: '스터디>코딩',
         participant: 3,
@@ -40,7 +45,8 @@ class GatheringController extends GetxController {
             name: '조현수',
             imageUrl: 'assets/images/user_2.png',
             job: '응용화공',
-            userTagList: ['창업', '성장', '기획', '디자인', '영업']),
+            userTagList: ['창업', '성장', '기획', '디자인', '영업'],),
+        over: false,
         title: '디자인스프린트 끝나고 뒤풀이가자!!',
         category: '음주>소주',
         participant: 40,
@@ -65,6 +71,32 @@ class GatheringController extends GetxController {
         ],
         previousImageList: [],
       ),
+      Gathering(
+        id: '3',
+        host: Host(
+          userId: '3',
+          name: '채승규',
+          imageUrl: 'assets/images/user_3.png',
+          job: '컴퓨터공학',
+          userTagList: ['성실', '열정', '책임감', '개발', '자바스크립트'],
+        ),
+        over: false,
+        title: '저랑 술배틀 뜨실분 구합니다!!',
+        category: '음주>소주',
+        participant: 1,
+        capacity: 3,
+        openTime: '2022-01-16 20:00',
+        endTime: '',
+        location: '대전 유성구 궁동 409',
+        locationDetail: '궁동 달빛포차',
+        hostMessage: '디자인스프린트 끝!!이제 술함 조져볼까요??',
+        tagList: ['교수님', '서포터즈', '수강생들', '고생했어요', '이젠 술마셔요', '달빛포차에서'],
+        previousImageList: [],
+      ),
     ];
+  }
+
+  Future<void> setCategoryGatheringList(String category) async {
+    //여기서 데이터 가져온후 세팅완료되면 그때 다음페이지로 넘어가주기
   }
 }

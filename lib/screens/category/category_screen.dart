@@ -19,8 +19,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
       appBar: AppBar(
         backgroundColor: kWhiteColor,
         foregroundColor: kBlackColor,
-        elevation: 0,
-        title: Text(widget.category),
+        elevation: 1,
+        centerTitle: false,
+        titleSpacing: 0,
+        title: Text(
+          widget.category,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
