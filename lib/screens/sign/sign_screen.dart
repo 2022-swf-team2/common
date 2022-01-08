@@ -26,15 +26,6 @@ class _SignScreenState extends State<SignScreen> {
   bool _nameChecked = false; // 중복확인 했는지 체크
   bool _isNameDuplicated = false;
 
-  final List<String> _enablePhoneNumber = [
-    '010',
-    '011',
-    '016',
-    '017',
-    '018',
-    '019'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

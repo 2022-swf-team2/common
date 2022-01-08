@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
 
-class MainScreenAdvertiseArea extends StatelessWidget {
-  const MainScreenAdvertiseArea({Key? key}) : super(key: key);
+class HomeScreenAdvertiseArea extends StatelessWidget {
+  const HomeScreenAdvertiseArea({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

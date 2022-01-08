@@ -1,10 +1,9 @@
 import 'package:common/constants.dart';
 import 'package:common/controllers/local_controller.dart';
-import 'package:common/screens/main/components/main_screen_advertise_area.dart';
+import 'package:common/screens/home/home_screen.dart';
+import 'package:common/screens/main/components/main_screen_bottom_navigation_bar.dart';
 import 'package:common/screens/university/university_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,17 +16,27 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final LocalController _localController = Get.put(LocalController());
   String _userUniversity = '';
+  int _currentScreenIndex = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getUserUniversity();
+    _getUserUniversity();
   }
 
-  void getUserUniversity() async {
+  void _getUserUniversity() async {
     _userUniversity = await (_localController.getUniversity()) ?? '충남대학교';
     setState(() {});
+  }
+
+  Widget _getMainScreen() {
+    switch (_currentScreenIndex) {
+      case 0:
+        return const HomeScreen();
+      default:
+        return Container();
+    }
   }
 
   @override
@@ -57,10 +66,14 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          MainScreenAdvertiseArea(),
-        ],
+      body: _getMainScreen(),
+      bottomNavigationBar: MainScreenBottomNavigationBar(
+        currentIndex: _currentScreenIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentScreenIndex = index;
+          });
+        },
       ),
     );
   }

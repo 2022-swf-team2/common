@@ -38,7 +38,7 @@ class SignScreenPhoneCheckArea extends StatelessWidget {
                         }
                         if (s.length == 10 ||
                             s.length == 11 &&
-                                controller.text.contains(s.substring(0, 3))) {
+                                kPhoneNumberList.contains(s.substring(0, 3))) {
                           checkPhoneNumber(true);
                         } else {
                           if (enablePhoneNumber) {

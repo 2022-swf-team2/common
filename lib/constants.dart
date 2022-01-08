@@ -4,8 +4,18 @@ const Color kWhiteColor = Color(0xFFFAFAFA);
 const Color kBlackColor = Color(0xFF000000);
 const Color kBlueColor = Color(0xFF51B6FF);
 const Color kGreyColor = Color(0xFF979797);
+const Color kCategoryGreyColor = Color(0xFF747474);
 const Color kLightGreyColor = Color(0xFFE9E9E9);
 const Color kRedColor = Color(0xFFFF0000);
+
+const List<String> kPhoneNumberList = [
+  '010',
+  '011',
+  '016',
+  '017',
+  '018',
+  '019'
+];
 
 final List<String> kAdvertisementImageList = [
   'assets/images/cafe_1.jpeg',
