@@ -1,6 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import '../../../constants.dart';
 
 class HomeScreenAdvertiseArea extends StatelessWidget {
   const HomeScreenAdvertiseArea({Key? key}) : super(key: key);

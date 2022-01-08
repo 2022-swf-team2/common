@@ -1,4 +1,4 @@
-import 'package:common/models/gathering.dart';
+import 'gathering.dart';
 
 class User {
   final String id;

@@ -1,7 +1,7 @@
-import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
+import '../../constants.dart';
 
-class CategoryScreen extends StatelessWidget {
+class CategoryScreen extends StatefulWidget {
   final String category;
   const CategoryScreen({
     Key? key,
@@ -9,13 +9,18 @@ class CategoryScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CategoryScreen> createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends State<CategoryScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kWhiteColor,
         foregroundColor: kBlackColor,
         elevation: 0,
-        title: Text(category),
+        title: Text(widget.category),
       ),
     );
   }

@@ -1,5 +1,3 @@
-import 'user.dart';
-
 class Host {
   final String userId;
   final String name;

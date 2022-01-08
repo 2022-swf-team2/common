@@ -1,8 +1,8 @@
-import 'package:common/constants.dart';
-import 'package:common/controllers/local_controller.dart';
-import 'package:common/screens/university/components/university_screen_location_select_area.dart';
-import 'package:common/screens/university/components/university_screen_university_select_area.dart';
 import 'package:flutter/material.dart';
+import 'components/university_screen_location_select_area.dart';
+import 'components/university_screen_university_select_area.dart';
+import '../../constants.dart';
+import '../../controllers/local_controller.dart';
 
 class UniversityScreen extends StatefulWidget {
   const UniversityScreen({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _UniversityScreenState extends State<UniversityScreen> {
             child: UniversityScreenUniversitySelectArea(
               universityList: kLocationList[_currentLocationListIndex]
                   ['university'],
-              saveUniversity: (String university){
+              saveUniversity: (String university) {
                 _localController.setUniversity(university);
               },
             ),

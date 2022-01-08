@@ -1,7 +1,7 @@
-import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../sign/sign_screen.dart';
+import '../../constants.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key}) : super(key: key);

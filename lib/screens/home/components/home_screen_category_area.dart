@@ -1,7 +1,6 @@
-import 'package:common/screens/category/category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../category/category_screen.dart';
 import '../../../constants.dart';
 
 class HomeScreenCategoryArea extends StatelessWidget {

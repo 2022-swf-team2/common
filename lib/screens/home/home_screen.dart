@@ -1,8 +1,8 @@
-import 'package:common/controllers/gathering_controller.dart';
-import 'package:common/models/gathering.dart';
 import 'package:flutter/material.dart';
-import 'components/home_screen_category_area.dart';
+import '../../controllers/gathering_controller.dart';
+import '../../models/gathering.dart';
 import '../../components/gathering_card.dart';
+import 'components/home_screen_category_area.dart';
 import 'components/home_screen_advertise_area.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -1,12 +1,11 @@
-import 'package:common/constants.dart';
-import 'package:common/screens/main/main_screen.dart';
-import 'package:common/screens/sign/components/sign_screen_app_bar.dart';
-import 'package:common/screens/sign/components/sign_screen_name_check_area.dart';
-import 'package:common/screens/sign/components/sign_screen_name_check_bottom_sheet.dart';
-import 'package:common/screens/sign/components/sign_screen_phone_check_area.dart';
-import 'package:common/screens/sign/components/sign_screen_phone_check_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../main/main_screen.dart';
+import 'components/sign_screen_app_bar.dart';
+import 'components/sign_screen_name_check_area.dart';
+import 'components/sign_screen_name_check_bottom_sheet.dart';
+import 'components/sign_screen_phone_check_area.dart';
+import 'components/sign_screen_phone_check_bottom_sheet.dart';
 
 class SignScreen extends StatefulWidget {
   const SignScreen({Key? key}) : super(key: key);

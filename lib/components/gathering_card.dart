@@ -1,10 +1,9 @@
-import 'package:common/models/gathering.dart';
-
+import 'package:flutter/material.dart';
 import 'gathering_card_info.dart';
 import 'gathering_card_tag.dart';
-import 'package:flutter/material.dart';
-
 import '../constants.dart';
+import '../utils.dart';
+import '../models/gathering.dart';
 
 class GatheringCard extends StatelessWidget {
   final Gathering gathering;

@@ -1,12 +1,12 @@
-import 'package:common/constants.dart';
-import 'package:common/controllers/gathering_controller.dart';
-import 'package:common/controllers/local_controller.dart';
-import 'package:common/controllers/user_controller.dart';
-import 'package:common/screens/home/home_screen.dart';
-import 'package:common/screens/main/components/main_screen_bottom_navigation_bar.dart';
-import 'package:common/screens/university/university_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'components/main_screen_bottom_navigation_bar.dart';
+import '../home/home_screen.dart';
+import '../university/university_screen.dart';
+import '../../constants.dart';
+import '../../controllers/gathering_controller.dart';
+import '../../controllers/local_controller.dart';
+import '../../controllers/user_controller.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -18,7 +18,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final LocalController _localController = Get.put(LocalController());
   final UserController _userController = Get.put(UserController());
-  final GatheringController _gatheringController = Get.put(GatheringController());
+  final GatheringController _gatheringController =
+      Get.put(GatheringController());
   String _userUniversity = '';
   int _currentScreenIndex = 0;
 

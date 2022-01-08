@@ -1,4 +1,4 @@
-import 'package:common/models/user.dart';
+import '../models/user.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
