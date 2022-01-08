@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
-class SignScreenPhoneCheckBottomSheet extends StatelessWidget {
-  final bool phoneNumberChecked;
+class SignScreenNameCheckBottomSheet extends StatelessWidget {
+  final bool nameChecked;
   final Function onPressed;
-  const SignScreenPhoneCheckBottomSheet({
+  const SignScreenNameCheckBottomSheet({
     Key? key,
-    required this.phoneNumberChecked,
+    required this.nameChecked,
     required this.onPressed,
   }) : super(key: key);
 
@@ -15,7 +15,7 @@ class SignScreenPhoneCheckBottomSheet extends StatelessWidget {
     return SafeArea(
       child: GestureDetector(
         onTap: () {
-         onPressed();
+          onPressed();
         },
         child: Container(
           alignment: Alignment.center,
@@ -24,9 +24,9 @@ class SignScreenPhoneCheckBottomSheet extends StatelessWidget {
           width: double.infinity,
           height: 50,
           decoration: BoxDecoration(
-              color: phoneNumberChecked ? kBlueColor : kGreyColor),
+              color: nameChecked ? kBlueColor : kGreyColor),
           child: const Text(
-            '다음',
+            '완료',
             style: TextStyle(
               color: kWhiteColor,
             ),

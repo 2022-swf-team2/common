@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-
 import '../../../constants.dart';
 
 class SignScreenPhoneCheckArea extends StatelessWidget {
-  final String phoneNumberString;
   final bool enablePhoneNumber;
-  final bool enablePhoneNumberChecked;
-  final bool phoneNumberChoosed;
+  final bool phoneNumberChecked;
   final Function checkPhoneNumber;
   final Function checkButtonPressed;
   final TextEditingController controller;
   const SignScreenPhoneCheckArea({
     Key? key,
-    required this.phoneNumberString,
     required this.enablePhoneNumber,
-    required this.enablePhoneNumberChecked,
-    required this.phoneNumberChoosed,
+    required this.phoneNumberChecked,
     required this.checkPhoneNumber,
     required this.checkButtonPressed,
     required this.controller,
@@ -36,13 +31,14 @@ class SignScreenPhoneCheckArea extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextField(
+                      enabled: !phoneNumberChecked,
                       onChanged: (String s) {
-                        if(s.length>11){
-                          controller.text = s.substring(0,11);
+                        if (s.length > 11) {
+                          controller.text = s.substring(0, 11);
                         }
                         if (s.length == 10 ||
                             s.length == 11 &&
-                                phoneNumberString.contains(s.substring(0, 3))) {
+                                controller.text.contains(s.substring(0, 3))) {
                           checkPhoneNumber(true);
                         } else {
                           if (enablePhoneNumber) {
@@ -54,8 +50,12 @@ class SignScreenPhoneCheckArea extends StatelessWidget {
                       autofocus: true,
                       keyboardType: TextInputType.number,
                     ),
+                    const SizedBox(height: 10),
                     !enablePhoneNumber
-                        ? const Text('휴대폰 번호가 올바르지 않습니다')
+                        ? const Text(
+                            '휴대폰 번호가 올바르지 않습니다',
+                            style: TextStyle(color: kRedColor),
+                          )
                         : const Text(''),
                   ],
                 ),
@@ -72,7 +72,7 @@ class SignScreenPhoneCheckArea extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: enablePhoneNumber
-                      ? phoneNumberChoosed
+                      ? phoneNumberChecked
                           ? kGreyColor
                           : kBlueColor
                       : kGreyColor,
@@ -80,7 +80,7 @@ class SignScreenPhoneCheckArea extends StatelessWidget {
                 width: 80,
                 height: 40,
                 child: Text(
-                  phoneNumberChoosed ? '확인완료' : '확인',
+                  phoneNumberChecked ? '확인완료' : '확인',
                   style: const TextStyle(
                     color: kWhiteColor,
                   ),

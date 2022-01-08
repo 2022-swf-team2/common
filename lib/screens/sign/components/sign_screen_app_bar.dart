@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
 class SignScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const SignScreenAppBar({Key? key}) : super(key: key);
+  final int currentIndex;
+  final Function backPressed;
+  const SignScreenAppBar({
+    Key? key,
+    required this.currentIndex,
+    required this.backPressed,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -17,7 +23,9 @@ class SignScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       foregroundColor: Colors.black,
       leading: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          backPressed();
+        },
         child: const Icon(Icons.arrow_back_ios),
       ),
       title: Row(
@@ -31,6 +39,4 @@ class SignScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-
 }
