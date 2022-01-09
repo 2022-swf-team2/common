@@ -1,8 +1,8 @@
-import 'package:common/components/gathering_card.dart';
-import 'package:common/controllers/gathering_controller.dart';
-import 'package:common/models/gathering.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
+import '../../components/gathering_card.dart';
+import '../../controllers/gathering_controller.dart';
+import '../../models/gathering.dart';
 
 class CategoryScreen extends StatefulWidget {
   final String category;

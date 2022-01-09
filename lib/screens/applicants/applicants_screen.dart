@@ -1,5 +1,5 @@
-import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
+import '../../constants.dart';
 
 class ApplicantsScreen extends StatelessWidget {
   const ApplicantsScreen({Key? key}) : super(key: key);

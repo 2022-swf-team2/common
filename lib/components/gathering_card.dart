@@ -1,4 +1,3 @@
-import 'package:common/screens/detail/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'gathering_card_info.dart';
@@ -6,6 +5,7 @@ import 'gathering_card_tag.dart';
 import '../constants.dart';
 import '../utils.dart';
 import '../models/gathering.dart';
+import '../screens/detail/detail_screen.dart';
 
 class GatheringCard extends StatelessWidget {
   final Gathering gathering;

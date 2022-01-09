@@ -1,5 +1,5 @@
-import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
+import '../../../constants.dart';
 
 class DetailScreenGatheringInfoCard extends StatelessWidget {
   final String title;

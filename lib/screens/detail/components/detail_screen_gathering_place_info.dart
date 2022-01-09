@@ -1,5 +1,5 @@
-import 'package:common/screens/detail/components/detail_screen_gathering_place_info_card.dart';
 import 'package:flutter/material.dart';
+import 'detail_screen_gathering_place_info_card.dart';
 
 class DetailScreenGatheringPlaceInfo extends StatelessWidget {
   final String location;
@@ -18,9 +18,12 @@ class DetailScreenGatheringPlaceInfo extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: Column(
         children: [
-          DetailScreenGatheringPlaceInfoCard(icon: Icons.location_on, content: location),
-          DetailScreenGatheringPlaceInfoCard(icon: Icons.near_me, content: locationDetail),
-          DetailScreenGatheringPlaceInfoCard(icon: Icons.chat, content: hostMessage),
+          DetailScreenGatheringPlaceInfoCard(
+              icon: Icons.location_on, content: location),
+          DetailScreenGatheringPlaceInfoCard(
+              icon: Icons.near_me, content: locationDetail),
+          DetailScreenGatheringPlaceInfoCard(
+              icon: Icons.chat, content: hostMessage),
         ],
       ),
     );

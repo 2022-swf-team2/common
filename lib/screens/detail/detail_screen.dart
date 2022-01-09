@@ -1,13 +1,11 @@
-import 'package:common/components/user_gathering_status.dart';
-import 'package:common/screens/applicants/applicants_screen.dart';
-import 'package:common/screens/detail/components/detail_screen_gathering_applicants_check_button.dart';
-import 'package:common/screens/detail/components/detail_screen_host_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../applicants/applicants_screen.dart';
 import '../../constants.dart';
 import '../../models/gathering.dart';
-import 'components/detail_screen_gathering_date_time.dart';
 import '../../components/user_info.dart';
+import '../../components/user_gathering_status.dart';
+import 'components/detail_screen_gathering_date_time.dart';
 import 'components/detail_screen_gathering_info_card.dart';
 import 'components/detail_screen_gathering_progress_bar.dart';
 import 'components/detail_screen_user_bottom_bar.dart';
@@ -15,6 +13,8 @@ import 'components/detail_screen_gathering_hash_tag.dart';
 import 'components/detail_screen_gathering_place.dart';
 import 'components/detail_screen_gathering_place_info.dart';
 import 'components/detail_screen_previous_gathering_image.dart';
+import 'components/detail_screen_gathering_applicants_check_button.dart';
+import 'components/detail_screen_host_bottom_bar.dart';
 
 class DetailScreen extends StatefulWidget {
   final Gathering gathering;
@@ -61,10 +61,12 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
       body: Column(
         children: [
-          widget.isHost ? Container() : const UserGatheringStatus(
-            //TODO 여기서 유저의 현재상태에 따라 어떤식의 text를 띄워줄지 정해야함
-            content: '신청중입니다',
-          ),
+          widget.isHost
+              ? Container()
+              : const UserGatheringStatus(
+                  //TODO 여기서 유저의 현재상태에 따라 어떤식의 text를 띄워줄지 정해야함
+                  content: '신청중입니다',
+                ),
           Expanded(
             child: ListView(
               children: [

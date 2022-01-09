@@ -1,5 +1,5 @@
-import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
+import '../../../constants.dart';
 
 class DetailScreenGatheringProgressBar extends StatelessWidget {
   final int participantCount;

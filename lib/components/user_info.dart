@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/detail/components/detail_screen_gathering_tag.dart';
+import 'gathering_card_tag.dart';
 import '../constants.dart';
 
 class UserInfo extends StatelessWidget {
@@ -51,7 +51,7 @@ class UserInfo extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                DetailScreenGatheringTag(tagList: hostTagList),
+                GatheringCardTag(tagList: hostTagList),
               ],
             ),
           ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 class UserGatheringStatus extends StatelessWidget {
   final String content;
-  const UserGatheringStatus({Key? key, required this.content}) : super(key: key);
+  const UserGatheringStatus({Key? key, required this.content})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
