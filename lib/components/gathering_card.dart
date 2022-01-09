@@ -39,11 +39,14 @@ class GatheringCard extends StatelessWidget {
     List<String> _dates = getDateTime(gatheringOpenTime, gatheringEndTime);
 
     return GestureDetector(
-      onTap: (){
-        Get.to(()=>DetailScreen(gathering: gathering));
+      onTap: () {
+        //TODO isHost의 기능이 결국 내가 호스트인가에 대한 bool값을 리턴
+        Get.to(() => DetailScreen(
+              gathering: gathering,
+              isHost: gathering.host.userId == '1',
+            ));
       },
       child: Container(
-
         padding: const EdgeInsets.symmetric(vertical: 10),
         margin: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
@@ -121,7 +124,8 @@ class GatheringCard extends StatelessWidget {
                     icon: Icons.event_available,
                   ),
                   GatheringCardInfo(
-                    content: '${_dates[1]} / ${_dates.length==2?'종료시간미정':_dates[2]}',
+                    content:
+                        '${_dates[1]} / ${_dates.length == 2 ? '종료시간미정' : _dates[2]}',
                     icon: Icons.timer,
                   ),
                   GatheringCardInfo(

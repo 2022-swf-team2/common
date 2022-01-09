@@ -1,4 +1,6 @@
 import 'package:common/components/user_gathering_status.dart';
+import 'package:common/screens/detail/components/detail_screen_gathering_applicants_check_button.dart';
+import 'package:common/screens/detail/components/detail_screen_host_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../models/gathering.dart';
@@ -6,7 +8,7 @@ import 'components/detail_screen_gathering_date_time.dart';
 import 'components/detail_screen_gathering_host.dart';
 import 'components/detail_screen_gathering_info_card.dart';
 import 'components/detail_screen_gathering_progress_bar.dart';
-import 'components/detail_screen_bottom_bar.dart';
+import 'components/detail_screen_user_bottom_bar.dart';
 import 'components/detail_screen_gathering_hash_tag.dart';
 import 'components/detail_screen_gathering_place.dart';
 import 'components/detail_screen_gathering_place_info.dart';
@@ -14,9 +16,11 @@ import 'components/detail_screen_previous_gathering_image.dart';
 
 class DetailScreen extends StatefulWidget {
   final Gathering gathering;
+  final bool isHost;
   const DetailScreen({
     Key? key,
     required this.gathering,
+    required this.isHost,
   }) : super(key: key);
 
   @override
@@ -24,6 +28,13 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.isHost);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,13 +53,13 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
         //TODO userId == hostId일 경우에 보여주고 아니면 가린다
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.people)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
         ],
       ),
       body: Column(
         children: [
-          const UserGatheringStatus(),
+          widget.isHost ? Container() : const UserGatheringStatus(),
           Expanded(
             child: ListView(
               children: [
@@ -57,6 +68,23 @@ class _DetailScreenState extends State<DetailScreen> {
                   name: widget.gathering.host.name,
                   job: widget.gathering.host.job,
                   hostTagList: widget.gathering.host.userTagList,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: kGreyColor,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Text(
+                    '상세보기',
+                    style: TextStyle(
+                      color: kGreyColor,
+                    ),
+                  ),
                 ),
                 DetailScreenGatheringInfoCard(
                   title: '제목',
@@ -73,6 +101,11 @@ class _DetailScreenState extends State<DetailScreen> {
                   participantCount: 40,
                   capacity: 55,
                 ),
+                widget.isHost
+                    ? DetailScreenGatheringApplicantsCheckButton(
+                        onPressed: () {},
+                      )
+                    : Container(),
                 DetailScreenGatheringDateTime(
                   openTime: widget.gathering.openTime,
                   endTime: widget.gathering.endTime,
@@ -94,10 +127,14 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: DetailScreenBottomBar(
-        chatPressed: () {},
-        applyPressed: () {},
-      ),
+      bottomNavigationBar: widget.isHost
+          ? DetailScreenHostBottomBar(
+              onPressed: () {},
+            )
+          : DetailScreenUserBottomBar(
+              chatPressed: () {},
+              applyPressed: () {},
+            ),
     );
   }
 }

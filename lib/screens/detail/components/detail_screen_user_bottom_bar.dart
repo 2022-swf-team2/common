@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
-class DetailScreenBottomBar extends StatelessWidget {
+class DetailScreenUserBottomBar extends StatelessWidget {
   final Function chatPressed;
   final Function applyPressed;
-  const DetailScreenBottomBar({
+  const DetailScreenUserBottomBar({
     Key? key,
     required this.chatPressed,
     required this.applyPressed,
