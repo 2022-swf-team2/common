@@ -27,7 +27,7 @@ class GatheringController extends GetxController {
         ),
         over: false,
         title: 'Flutter 공부할사람 구해요!!',
-        category: '스터디>코딩',
+        category: '스터디',
         participant: 3,
         capacity: 5,
         openTime: '2022-01-14 18:00',
@@ -52,7 +52,7 @@ class GatheringController extends GetxController {
         ),
         over: false,
         title: '디자인스프린트 끝나고 뒤풀이가자!!',
-        category: '음주>소주',
+        category: '음주',
         participant: 40,
         capacity: 55,
         openTime: '2022-01-14 18:00',
@@ -89,7 +89,7 @@ class GatheringController extends GetxController {
         ),
         over: false,
         title: '저랑 술배틀 뜨실분 구합니다!!',
-        category: '음주>소주',
+        category: '음주',
         participant: 1,
         capacity: 3,
         openTime: '2022-01-16 20:00',
@@ -114,7 +114,7 @@ class GatheringController extends GetxController {
         ),
         over: false,
         title: '음주코딩!!마시면서 하자!!',
-        category: '음주>소주',
+        category: '음주',
         participant: 2,
         capacity: 10,
         openTime: '2022-01-16 20:00',
@@ -133,5 +133,12 @@ class GatheringController extends GetxController {
 
   Future<void> setCategoryGatheringList(String category) async {
     //여기서 데이터 가져온후 세팅완료되면 그때 다음페이지로 넘어가주기
+    _categoryGatheringList = [];
+    for(Gathering gathering in _gatheringList){
+      if(gathering.category == category){
+        _categoryGatheringList.add(gathering);
+      }
+    }
+    update();
   }
 }

@@ -1,5 +1,6 @@
 
 List<String> getDateTime(String openTime,String endTime){
+  //[날짜 시간 (걸리는시간)]
   if(endTime == ''){
     List<String> _date = openTime.split(' ');
     return [_date[0],_date[1]];

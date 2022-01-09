@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   final GatheringController _gatheringController =
       Get.put(GatheringController());
   String _userUniversity = '';
-  int _currentScreenIndex = 0;
+  int _currentScreenIndex = 2;
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getMainScreen() {
     switch (_currentScreenIndex) {
-      case 0:
+      case 2:
         return const HomeScreen();
       default:
         return Container();
@@ -75,6 +75,9 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: MainScreenBottomNavigationBar(
         currentIndex: _currentScreenIndex,
         onTap: (int index) {
+          if(index == 0 || index == 3){
+            return;
+          }
           setState(() {
             _currentScreenIndex = index;
           });

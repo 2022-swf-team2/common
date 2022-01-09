@@ -23,15 +23,15 @@ class _HomeScreenState extends State<HomeScreen> {
     _gatheringList = _gatheringController.gatheringList;
   }
 
-  Widget _getGatheringCard(List<Gathering> list){
+  Widget _getGatheringCard(List<Gathering> list) {
     return Column(
-      children: list.map((Gathering gathering){
+      children: list.map((Gathering gathering) {
         return GatheringCard(
           gathering: gathering,
           userName: gathering.host.name,
           userImageUrl: gathering.host.imageUrl,
           userJob: gathering.host.job,
-          gatheringTitle:gathering.title,
+          gatheringTitle: gathering.title,
           gatheringParticipant: gathering.participant,
           gatheringCapacity: gathering.capacity,
           gatheringOpenTime: gathering.openTime,
@@ -51,21 +51,20 @@ class _HomeScreenState extends State<HomeScreen> {
           const HomeScreenAdvertiseArea(),
           const HomeScreenCategoryArea(),
           const Divider(thickness: 2),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:  [
-              const Text(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
                   '최근 올라온 모임을 소개해드릴게요!!',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-            const SizedBox(height: 10),
-                _getGatheringCard(_gatheringList),
-              ],
-            ),
+              ),
+              _getGatheringCard(_gatheringList),
+            ],
           ),
         ],
       ),
@@ -81,4 +80,3 @@ class RowCheck extends StatelessWidget {
     return Row();
   }
 }
-

@@ -7,6 +7,8 @@ const Color kGreyColor = Color(0xFF979797);
 const Color kCategoryGreyColor = Color(0xFF747474);
 const Color kLightGreyColor = Color(0xFFE9E9E9);
 const Color kRedColor = Color(0xFFFF0000);
+const Color kYellowColor = Color(0xFFFFB800);
+const Color kPinkColor = Color(0xFFFF7878);
 
 const List<String> kPhoneNumberList = [
   '010',
