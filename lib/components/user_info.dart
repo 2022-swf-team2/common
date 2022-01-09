@@ -39,18 +39,19 @@ class UserInfo extends StatelessWidget {
               children: [
                 RichText(
                   text: TextSpan(
-                    style: const TextStyle(color: kBlackColor, fontSize: 15),
+                    style: const TextStyle(color: kBlackColor, fontSize: 16),
                     children: [
                       TextSpan(
                           text: name,
                           style: const TextStyle(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18
                           )),
                       TextSpan(text: ' | $job'),
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 GatheringCardTag(tagList: hostTagList),
               ],
             ),

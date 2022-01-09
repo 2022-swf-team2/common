@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'detail_screen_gathering_tag.dart';
+import '../../../components/gathering_card_tag.dart';
 
 class DetailScreenGatheringHashTag extends StatelessWidget {
   final List<String> tagList;
-  const DetailScreenGatheringHashTag({Key? key, required this.tagList,}) : super(key: key);
+  const DetailScreenGatheringHashTag({
+    Key? key,
+    required this.tagList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class DetailScreenGatheringHashTag extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 5),
-          DetailScreenGatheringTag(tagList: tagList),
+          GatheringCardTag(tagList: tagList),
         ],
       ),
     );

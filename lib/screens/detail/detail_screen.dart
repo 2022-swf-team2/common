@@ -111,7 +111,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 widget.isHost
                     ? DetailScreenGatheringApplicantsCheckButton(
                         onPressed: () {
-                          Get.to(() => const ApplicantsScreen());
+                          Get.to(() =>
+                              ApplicantsScreen(gathering: widget.gathering));
                         },
                       )
                     : Container(),
