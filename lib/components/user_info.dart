@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'detail_screen_gathering_tag.dart';
-import '../../../constants.dart';
+import '../screens/detail/components/detail_screen_gathering_tag.dart';
+import '../constants.dart';
 
-class DetailScreenGatheringHost extends StatelessWidget {
+class UserInfo extends StatelessWidget {
   final String imageUrl;
   final String name;
   final String job;
   final List<String> hostTagList;
-  const DetailScreenGatheringHost({
+  const UserInfo({
     Key? key,
     required this.imageUrl,
     required this.name,

@@ -1,11 +1,13 @@
 import 'package:common/components/user_gathering_status.dart';
+import 'package:common/screens/applicants/applicants_screen.dart';
 import 'package:common/screens/detail/components/detail_screen_gathering_applicants_check_button.dart';
 import 'package:common/screens/detail/components/detail_screen_host_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../constants.dart';
 import '../../models/gathering.dart';
 import 'components/detail_screen_gathering_date_time.dart';
-import 'components/detail_screen_gathering_host.dart';
+import '../../components/user_info.dart';
 import 'components/detail_screen_gathering_info_card.dart';
 import 'components/detail_screen_gathering_progress_bar.dart';
 import 'components/detail_screen_user_bottom_bar.dart';
@@ -59,11 +61,14 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
       body: Column(
         children: [
-          widget.isHost ? Container() : const UserGatheringStatus(),
+          widget.isHost ? Container() : const UserGatheringStatus(
+            //TODO 여기서 유저의 현재상태에 따라 어떤식의 text를 띄워줄지 정해야함
+            content: '신청중입니다',
+          ),
           Expanded(
             child: ListView(
               children: [
-                DetailScreenGatheringHost(
+                UserInfo(
                   imageUrl: widget.gathering.host.imageUrl,
                   name: widget.gathering.host.name,
                   job: widget.gathering.host.job,
@@ -103,7 +108,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 widget.isHost
                     ? DetailScreenGatheringApplicantsCheckButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => const ApplicantsScreen());
+                        },
                       )
                     : Container(),
                 DetailScreenGatheringDateTime(
@@ -119,9 +126,11 @@ class _DetailScreenState extends State<DetailScreen> {
                 DetailScreenGatheringHashTag(
                   tagList: widget.gathering.tagList,
                 ),
-                DetailScreenPreviousGatheringImage(
-                  imageList: widget.gathering.previousImageList,
-                ),
+                widget.gathering.previousImageList.isNotEmpty
+                    ? DetailScreenPreviousGatheringImage(
+                        imageList: widget.gathering.previousImageList,
+                      )
+                    : Container(),
               ],
             ),
           ),

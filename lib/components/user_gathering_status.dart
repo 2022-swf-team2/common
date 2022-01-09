@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class UserGatheringStatus extends StatelessWidget {
-  const UserGatheringStatus({Key? key}) : super(key: key);
+  final String content;
+  const UserGatheringStatus({Key? key, required this.content}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +15,13 @@ class UserGatheringStatus extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: const [
-            Icon(
+          children: [
+            const Icon(
               Icons.assignment,
               color: kWhiteColor,
             ),
             Text(
-              '모임 신청 승인을 기다리고있습니다.',
+              content,
               style: TextStyle(
                 color: kWhiteColor,
               ),
