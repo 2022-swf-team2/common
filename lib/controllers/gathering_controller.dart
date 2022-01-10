@@ -1,8 +1,14 @@
+import 'package:common/controllers/user_controller.dart';
+import 'package:common/models/applicant.dart';
+import 'package:common/models/user.dart';
+
 import '../models/gathering.dart';
 import '../models/host.dart';
 import 'package:get/get.dart';
 
 class GatheringController extends GetxController {
+
+  final UserController _userController = UserController.to;
   static GatheringController get to => Get.find();
 
   List<Gathering> _gatheringList = [];
@@ -30,16 +36,22 @@ class GatheringController extends GetxController {
         category: '스터디',
         participant: 3,
         capacity: 5,
-        openTime: '2022-01-14 18:00',
-        endTime: '2022-01-14 20:00',
+        openTime: '2022-01-18 18:00',
+        endTime: '2022-01-18 20:00',
         location: '대전 유성구 대학로99',
         locationDetail: '충남대 공대 5호관 415호',
         hostMessage: 'ESFJ인 사람이랑 코딩하자!! MBTI 같으면 시너지가 늘어납니다~~ 나이 성별 무관 상관없어요~~',
         tagList: ['20대', '30대', '학과무관', '아무나', '다와라'],
         previousImageList: [],
-        applyList: [],
-        approvalList: [],
-        cancelList: [],
+        applyList: _userController.userList.map((User user){
+          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList);
+        }).toList(),
+        approvalList: _userController.userList.map((User user){
+          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList);
+        }).toList().sublist(0,2),
+        cancelList: _userController.userList.map((User user){
+          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList);
+        }).toList().sublist(2,4),
       ),
       Gathering(
         id: '2',
@@ -92,7 +104,7 @@ class GatheringController extends GetxController {
         category: '음주',
         participant: 1,
         capacity: 3,
-        openTime: '2022-01-16 20:00',
+        openTime: '2022-01-19 20:00',
         endTime: '',
         location: '대전 유성구 궁동 409',
         locationDetail: '궁동 달빛포차',
@@ -123,7 +135,7 @@ class GatheringController extends GetxController {
         locationDetail: '궁동 역전할머니맥주',
         hostMessage: '디자인스프린트 끝나도 술마시며 코딩연습해요!!',
         tagList: ['교수님', '서포터즈', '수강생들', '고생했어요','공부는 끝이없다','음주','코딩','둘다하자'],
-        previousImageList: [],
+        previousImageList: ['assets/images/exercise_1.jpeg'],
         applyList: [],
         approvalList: [],
         cancelList: [],
@@ -140,5 +152,9 @@ class GatheringController extends GetxController {
       }
     }
     update();
+  }
+
+  Future<void> updateList() async{
+
   }
 }

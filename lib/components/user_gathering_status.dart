@@ -22,7 +22,7 @@ class UserGatheringStatus extends StatelessWidget {
             ),
             Text(
               content,
-              style: TextStyle(
+              style: const TextStyle(
                 color: kWhiteColor,
               ),
             ),

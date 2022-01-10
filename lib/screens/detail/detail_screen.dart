@@ -78,7 +78,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  margin: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -104,9 +104,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   content: widget.gathering.category,
                   icon: Icons.category,
                 ),
-                const DetailScreenGatheringProgressBar(
-                  participantCount: 40,
-                  capacity: 55,
+                DetailScreenGatheringProgressBar(
+                  participantCount: widget.gathering.participant,
+                  capacity: widget.gathering.capacity,
                 ),
                 widget.isHost
                     ? DetailScreenGatheringApplicantsCheckButton(

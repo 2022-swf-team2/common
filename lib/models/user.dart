@@ -6,6 +6,7 @@ class User {
   final String name;
   final String university;
   final String job;
+  final String imageUrl;
   final List<String> userTagList;
   final List<Gathering> applyGatheringList;
   final List<Gathering> openGatheringList;
@@ -18,6 +19,7 @@ class User {
     required this.name,
     required this.university,
     required this.job,
+    required this.imageUrl,
     required this.userTagList,
     required this.applyGatheringList,
     required this.openGatheringList,
@@ -31,6 +33,7 @@ class User {
         name: json['name'],
         university: json['university'],
         job: json['job'],
+        imageUrl: json['imageUrl'],
         userTagList: json['userTagList'],
         applyGatheringList: json['applyGatheringList'].map((Map<String,dynamic> gathering){
           return Gathering.fromJson(gathering);
@@ -52,6 +55,7 @@ class User {
       'name': name,
       'university': university,
       'job': job,
+      'imageUrl':imageUrl,
       'userTagList': userTagList,
       'applyGatheringList': applyGatheringList.map((Gathering gathering){
         return gathering.toMap();

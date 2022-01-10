@@ -38,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget _getMainScreen() {
     switch (_currentScreenIndex) {
       case 2:
-        return const HomeScreen();
+        return HomeScreen(university: _userUniversity);
       default:
         return Container();
     }
@@ -47,30 +47,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: kWhiteColor,
-        foregroundColor: kBlackColor,
-        elevation: 1,
-        title: GestureDetector(
-          onTap: () {
-            Get.to(() => const UniversityScreen());
-          },
-          child: Row(
-            children: [
-              Text(_userUniversity),
-              const SizedBox(width: 5),
-              const RotatedBox(
-                quarterTurns: 1,
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 15,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+
       body: _getMainScreen(),
       bottomNavigationBar: MainScreenBottomNavigationBar(
         currentIndex: _currentScreenIndex,

@@ -1,3 +1,5 @@
+import 'package:common/screens/category/components/category_screen_filter_button.dart';
+import 'package:common/utils.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../components/gathering_card.dart';
@@ -16,6 +18,8 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  int _filterIndex = 0;
+
   final GatheringController _gatheringController = GatheringController.to;
   List<Gathering> _gatheringList = [];
 
@@ -46,24 +50,67 @@ class _CategoryScreenState extends State<CategoryScreen> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: ListView(
+      body: Column(
         children: [
-          Column(
-            children: _gatheringList.map((Gathering gathering) {
-              return GatheringCard(
-                gathering: gathering,
-                userName: gathering.host.name,
-                userImageUrl: gathering.host.imageUrl,
-                userJob: gathering.host.job,
-                gatheringTitle: gathering.title,
-                gatheringParticipant: gathering.participant,
-                gatheringCapacity: gathering.capacity,
-                gatheringOpenTime: gathering.openTime,
-                gatheringEndTime: gathering.endTime,
-                gatheringPlace: gathering.locationDetail,
-                gatheringTagList: gathering.tagList,
-              );
-            }).toList(),
+          Row(
+            children: [
+              CategoryScreenFilterButton(
+                onPressed: (int index) {
+                  setState(() {
+                    _filterIndex = index;
+                    _gatheringList = getListWithFilter(_gatheringList, index);
+                  });
+                },
+                title: '마감순',
+                currentIndex: _filterIndex,
+                buttonIndex: 0,
+              ),
+              CategoryScreenFilterButton(
+                onPressed: (int index) {
+                  setState(() {
+                    _filterIndex = index;
+                    _gatheringList = getListWithFilter(_gatheringList, index);
+                  });
+                },
+                title: '최신순',
+                currentIndex: _filterIndex,
+                buttonIndex: 1,
+              ),
+              CategoryScreenFilterButton(
+                onPressed: (int index) {
+                  setState(() {
+                    _filterIndex = index;
+                    _gatheringList = getListWithFilter(_gatheringList, index);
+                  });
+                },
+                title: '인기 호스트 순',
+                currentIndex: _filterIndex,
+                buttonIndex: 2,
+              ),
+            ],
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                Column(
+                  children: _gatheringList.map((Gathering gathering) {
+                    return GatheringCard(
+                      gathering: gathering,
+                      userName: gathering.host.name,
+                      userImageUrl: gathering.host.imageUrl,
+                      userJob: gathering.host.job,
+                      gatheringTitle: gathering.title,
+                      gatheringParticipant: gathering.participant,
+                      gatheringCapacity: gathering.capacity,
+                      gatheringOpenTime: gathering.openTime,
+                      gatheringEndTime: gathering.endTime,
+                      gatheringPlace: gathering.locationDetail,
+                      gatheringTagList: gathering.tagList,
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -1,4 +1,7 @@
+import 'package:common/screens/university/university_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../constants.dart';
 import 'components/home_screen_category_area.dart';
 import 'components/home_screen_advertise_area.dart';
 import '../../controllers/gathering_controller.dart';
@@ -6,7 +9,8 @@ import '../../models/gathering.dart';
 import '../../components/gathering_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final String university;
+  const HomeScreen({Key? key, required this.university}) : super(key: key);
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -46,6 +50,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: kWhiteColor,
+        foregroundColor: kBlackColor,
+        elevation: 1,
+        title: GestureDetector(
+          onTap: () {
+            Get.to(() => const UniversityScreen());
+          },
+          child: Row(
+            children: [
+              Text(widget.university),
+              const SizedBox(width: 5),
+              const RotatedBox(
+                quarterTurns: 1,
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 15,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: ListView(
         children: [
           const HomeScreenAdvertiseArea(),

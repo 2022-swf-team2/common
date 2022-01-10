@@ -13,7 +13,8 @@ class DetailScreenGatheringProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double subWidth = MediaQuery.of(context).size.width - 20;
-    double mainWidth = subWidth * (participantCount / capacity);
+    double mainWidth =
+        subWidth * (participantCount / (capacity > 0 ? capacity : 1));
     return Container(
       padding: const EdgeInsets.all(10),
       child: Column(
