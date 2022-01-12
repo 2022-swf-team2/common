@@ -1,3 +1,4 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:common/screens/university/university_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GatheringController _gatheringController = GatheringController.to;
-
+  final DatabaseController _databaseController = DatabaseController.to;
   List<Gathering> _gatheringList = [];
 
   @override
@@ -25,9 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     _gatheringList = _gatheringController.gatheringList;
+
   }
 
   Widget _getGatheringCard(List<Gathering> list) {
+    _gatheringController.updateList();
     return Column(
       children: list.map((Gathering gathering) {
         return GatheringCard(

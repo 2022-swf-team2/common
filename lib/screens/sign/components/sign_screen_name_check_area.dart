@@ -1,3 +1,4 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
@@ -20,6 +21,8 @@ class SignScreenNameCheckArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DatabaseController _controller = DatabaseController.to;
+
     return Column(
       children: [
         const Text('닉네임'),
@@ -68,8 +71,11 @@ class SignScreenNameCheckArea extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                checkButtonPressed();
+              onTap: () async{
+                if(await _controller.checkNameIsDuplicated(controller.text)){
+                  checkButtonPressed();
+                }
+
               },
               child: Container(
                 margin: const EdgeInsets.only(right: 20),

@@ -7,19 +7,21 @@ class DatabaseController extends GetxController {
   static DatabaseController get to => Get.find();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  User? user;
+
   Future<User> getUser(String id) async {
     DocumentSnapshot<Map<String, dynamic>> _dbUser =
-        await (_firestore.collection('user').doc('EGGp0VhOeiRn81YeZIuW').get());
+        await (_firestore.collection('user').doc(id).get());
 
     Map<String, dynamic> json = _dbUser.data()!;
     User user = User.fromJson({
-      'id':_dbUser.id,
+      'id': _dbUser.id,
       ...json,
     });
     return user;
   }
 
-  Future<bool> checkPhoneNumberIsDuplicated(String phoneNumber)async{
+  Future<bool> checkPhoneNumberIsDuplicated(String phoneNumber) async {
     QuerySnapshot _dbPhoneList = await (_firestore
         .collection('user')
         .where('phoneNumber', isEqualTo: phoneNumber)
@@ -28,12 +30,54 @@ class DatabaseController extends GetxController {
     return _getPhoneList.isEmpty;
   }
 
-  Future<bool> checkNameIsDuplicated(String name)async{
+  Future<bool> checkNameIsDuplicated(String name) async {
     QuerySnapshot _dbNameList = await (_firestore
         .collection('user')
         .where('name', isEqualTo: name)
         .get());
     List _getNameList = _dbNameList.docs.toList();
     return _getNameList.isEmpty;
+  }
+
+  Future<void> makeUser(Map<String, dynamic> body) async {
+    await _firestore.collection('user').add(body).then((value) {
+      user = User.fromJson({
+        'id': value.id,
+        ...body,
+      });
+      update();
+    });
+  }
+
+  Future<void> makeGathering(Map<String, dynamic> body) async {
+    await _firestore.collection('gathering').add(body);
+  }
+
+  Future<List<User>?> getUserDocs() async {
+    QuerySnapshot userData = await _firestore.collection('user').get();
+    List<User> userList = [];
+    List userDocs = userData.docs;
+    for(int i = 0; i < userDocs.length;i++){
+      Map<String, dynamic> body = {
+        'id': userDocs[i].id,
+        ...userDocs[i].data() as Map<String, dynamic>
+      };
+      userList.add(User.fromJson(body));
+    }
+    return userList;
+  }
+
+  Future<List<Gathering>?> getGatheringDocs() async {
+    QuerySnapshot gatheringData = await _firestore.collection('gathering').get();
+    List<Gathering> gatheringList = [];
+    List gatheringDocs = gatheringData.docs;
+    for(int i = 0; i < gatheringDocs.length;i++){
+      Map<String, dynamic> body = {
+        'id': gatheringDocs[i].id,
+        ...gatheringDocs[i].data() as Map<String, dynamic>
+      };
+      gatheringList.add(Gathering.fromJson(body));
+    }
+    return gatheringList;
   }
 }

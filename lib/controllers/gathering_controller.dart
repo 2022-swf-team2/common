@@ -1,3 +1,4 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:common/controllers/user_controller.dart';
 import 'package:common/models/applicant.dart';
 import 'package:common/models/user.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 
 class GatheringController extends GetxController {
 
-  final UserController _userController = UserController.to;
+  final DatabaseController _databaseController = DatabaseController.to;
   static GatheringController get to => Get.find();
 
   List<Gathering> _gatheringList = [];
@@ -42,15 +43,9 @@ class GatheringController extends GetxController {
         hostMessage: 'ESFJ인 사람이랑 코딩하자!! MBTI 같으면 시너지가 늘어납니다~~ 나이 성별 무관 상관없어요~~',
         tagList: ['20대', '30대', '학과무관', '아무나', '다와라'],
         previousImageList: [],
-        applyList: _userController.userList.map((User user){
-          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList );
-        }).toList(),
-        approvalList: _userController.userList.map((User user){
-          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList );
-        }).toList().sublist(0,2),
-        cancelList: _userController.userList.map((User user){
-          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList);
-        }).toList().sublist(2,4),
+        applyList:[],
+        approvalList: [],
+        cancelList: [],
       ),
       Gathering(
         id: '2',
@@ -154,6 +149,7 @@ class GatheringController extends GetxController {
   }
 
   Future<void> updateList() async{
-
+    _databaseController.getGatheringDocs();
+    _databaseController.getUserDocs();
   }
 }

@@ -3,9 +3,11 @@ import 'package:common/controllers/database_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'screens/main/main_screen.dart';
+import 'controllers/connect_controller.dart';
+import 'controllers/gathering_controller.dart';
+import 'controllers/local_controller.dart';
+import 'controllers/user_controller.dart';
 import 'screens/start/start_screen.dart';
-import 'screens/home/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DatabaseController _controller = Get.put(DatabaseController());
-    _controller.getUser('123');
+    final LocalController _localController = Get.put(LocalController());
+    final UserController _userController = Get.put(UserController());
+    final GatheringController _gatheringController =
+    Get.put(GatheringController());
+    final ConnectController _connectController = Get.put(ConnectController());
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SWF team2',

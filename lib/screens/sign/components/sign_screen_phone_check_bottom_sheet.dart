@@ -15,10 +15,9 @@ class SignScreenPhoneCheckBottomSheet extends StatelessWidget {
     return SafeArea(
       child: GestureDetector(
         onTap: () {
-          if(phoneNumberChecked){
+          if (phoneNumberChecked) {
             onPressed();
           }
-
         },
         child: Container(
           alignment: Alignment.center,

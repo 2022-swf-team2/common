@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/constants.dart';
 import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -92,10 +92,26 @@ class _SignScreenState extends State<SignScreen> {
             )
           : SignScreenNameCheckBottomSheet(
               nameChecked: _nameChecked,
-              onPressed: () async{
-                bool isOk = await _controller.checkPhoneNumberIsDuplicated(_phoneNumberEditingController.text);
-                print(isOk);
-                // Get.to(() => const MainScreen());
+              onPressed: () async {
+                Map<String, dynamic> body = {
+                  'name': _nameEditingController.text,
+                  'phoneNumber': _phoneNumberEditingController.text,
+                  'university': '충남대학교',
+                  'job': '',
+                  'imageUrl': noPersonImage,
+                  'instaId': '',
+                  'kakaoLinkUrl': '',
+                  'userTagList': [],
+                  'applyGatheringList': [],
+                  'openGatheringList': [],
+                  'likeGathering': [],
+                  'likeUser': [],
+                };
+                await _controller.makeUser(body).then((value) {
+                  Get.offAll(
+                    () => const MainScreen(),
+                  );
+                });
               }),
     );
   }

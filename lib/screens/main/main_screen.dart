@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'components/main_screen_bottom_navigation_bar.dart';
 import '../home/home_screen.dart';
 import '../follow/follow_screen.dart';
 import '../user/user_screen.dart';
-import '../../controllers/connect_controller.dart';
-import '../../controllers/gathering_controller.dart';
 import '../../controllers/local_controller.dart';
 import '../../controllers/user_controller.dart';
 
@@ -17,11 +14,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final LocalController _localController = Get.put(LocalController());
-  final UserController _userController = Get.put(UserController());
-  final GatheringController _gatheringController =
-      Get.put(GatheringController());
-  final ConnectController _connectController = Get.put(ConnectController());
+  final LocalController _localController = LocalController.to;
+  final UserController _userController = UserController.to;
 
   String _userUniversity = '';
   int _currentScreenIndex = 2;

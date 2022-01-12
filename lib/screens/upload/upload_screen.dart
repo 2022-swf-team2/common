@@ -1,3 +1,4 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/user_info.dart';
@@ -27,6 +28,8 @@ class UploadScreen extends StatefulWidget {
 }
 
 class _UploadScreenState extends State<UploadScreen> {
+  final DatabaseController _controller = DatabaseController.to;
+
   User? user;
   final UserController _userController = UserController.to;
 
@@ -173,8 +176,35 @@ class _UploadScreenState extends State<UploadScreen> {
         ],
       ),
       bottomNavigationBar: UploadScreenBottomBar(
-        uploadPressed: () {
+        uploadPressed: ()async {
           //TODO 등록하기
+          Map<String, dynamic> body = {
+            'host': {
+              'userId':_controller.user!.id,
+              'name':_controller.user!.name,
+              'imageUrl':_controller.user!.imageUrl,
+              'job':_controller.user!.job,
+              'userTagList':_controller.user!.userTagList,
+            },
+            'over':false,
+            'title':_titleController.text,
+            'category':widget.category,
+            'participant':0,
+            'capacity':_guestCount,
+            'openTime':_openTime.toString(),
+            'endTime':_noEndTime?'':_endTime.toString(),
+            'location':_location,
+            'locationDetail':_locationDetailController.text,
+            'hostMessage':_hostMessageController.text,
+            'tagList':_gatheringTagList,
+            'previousImageList':[],
+            'applyList':[],
+            'approvalList':[],
+            'cancelList':[],
+          };
+          await _controller.makeGathering(body).then((value) {
+            Get.back();
+          });
         },
       ),
     );

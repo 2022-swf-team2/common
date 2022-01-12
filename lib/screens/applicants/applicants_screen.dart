@@ -4,7 +4,6 @@ import 'components/applicants_screen_select_area.dart';
 import 'components/applicants_screen_applicant_card.dart';
 import '../../constants.dart';
 import '../../../models/gathering.dart';
-import '../../../models/applicant.dart';
 
 class ApplicantsScreen extends StatefulWidget {
   final Gathering gathering;

@@ -27,7 +27,7 @@ class UploadScreenTitleArea extends StatelessWidget {
           maxLines: 2,
           maxLength: 20,
           onChanged: (String s) {
-            if (s.substring(s.length - 1) == '\n') {
+            if (s.isNotEmpty &&s.substring(s.length - 1) == '\n') {
               focusNode.unfocus();
             }
           },

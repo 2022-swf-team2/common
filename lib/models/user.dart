@@ -1,5 +1,3 @@
-import 'package:common/constants.dart';
-
 import 'gathering.dart';
 
 class User {
