@@ -9,11 +9,11 @@ class User {
   String imageUrl;
   String instaId;
   String kakaoLinkUrl;
-  List userTagList;
-  final List applyGatheringList;
-  final List openGatheringList;
-  final List likeGathering;
-  final List likeUser;
+  List userTagList;//String
+  final List applyGatheringList;//Gathering
+  final List openGatheringList;//Gathering
+  final List likeGathering;//Gathering
+  final List likeUser;//User
 
   User({
     required this.id,

@@ -25,7 +25,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final GatheringController _gatheringController = GatheringController.to;
 
   @override
   Widget build(BuildContext context) {
@@ -64,22 +63,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             isFollowed: false,
             followPressed: () {},
             followedPressed: () {},
-            editPressed: ()async {
-
-             await Get.to(() => ProfileScreenEditScreen(user: widget.user));
-             setState(() {
-
-             });
+            editPressed: () async {
+              await Get.to(() => ProfileScreenEditScreen(user: widget.user));
+              setState(() {});
             },
           ),
           ProfileScreenGatheringArea(
             title: '호스트로 개최한 모임',
-            gatheringList: _gatheringController.gatheringList.sublist(0, 2),
+            gatheringList: widget.user.openGatheringList,
             onPressed: () {},
           ),
           ProfileScreenGatheringArea(
             title: '게스트로 참여한 모임',
-            gatheringList: _gatheringController.gatheringList.sublist(0, 2),
+            gatheringList: widget.user.applyGatheringList,
             onPressed: () {},
           ),
         ],

@@ -110,8 +110,11 @@ class _DetailScreenState extends State<DetailScreen> {
                 widget.isHost
                     ? DetailScreenGatheringApplicantsCheckButton(
                         onPressed: () {
-                          Get.to(() =>
-                              ApplicantsScreen(gathering: widget.gathering,),);
+                          Get.to(
+                            () => ApplicantsScreen(
+                              gathering: widget.gathering,
+                            ),
+                          );
                         },
                       )
                     : Container(),
@@ -119,14 +122,13 @@ class _DetailScreenState extends State<DetailScreen> {
                   openTime: widget.gathering.openTime,
                   endTime: widget.gathering.endTime,
                 ),
-                const DetailScreenGatheringPlace(),
                 DetailScreenGatheringPlaceInfo(
                   location: widget.gathering.location,
                   locationDetail: widget.gathering.locationDetail,
                   hostMessage: widget.gathering.hostMessage,
                 ),
                 DetailScreenGatheringHashTag(
-                  tagList: widget.gathering.tagList ,
+                  tagList: widget.gathering.tagList,
                 ),
                 widget.gathering.previousImageList.isNotEmpty
                     ? DetailScreenPreviousGatheringImage(

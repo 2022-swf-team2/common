@@ -56,16 +56,16 @@ class Gathering {
         hostMessage: json['hostMessage'],
         tagList: json['tagList'],
         previousImageList: json['previousImageList'],
-        applyList: json['applyList'].map((dynamic applicant) {
+        applyList: json['applyList'].map((applicant) {
           return Applicant.fromJson(applicant);
-        }).toList,
+        }).toList(),
         approvalList:
-            json['approvalList'].map((dynamic applicant) {
+            json['approvalList'].map((applicant) {
           return Applicant.fromJson(applicant);
-        }).toList,
-        cancelList: json['cancelList'].map((dynamic applicant) {
+        }).toList(),
+        cancelList: json['cancelList'].map((applicant) {
           return Applicant.fromJson(applicant);
-        }).toList,
+        }).toList(),
       );
 
   Map<String, dynamic> toMap() {

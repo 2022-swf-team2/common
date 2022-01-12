@@ -9,16 +9,17 @@ class DatabaseController extends GetxController {
 
   User? user;
 
-  Future<User> getUser(String id) async {
+  Future<void> getUser(String id) async {
     DocumentSnapshot<Map<String, dynamic>> _dbUser =
         await (_firestore.collection('user').doc(id).get());
 
     Map<String, dynamic> json = _dbUser.data()!;
-    User user = User.fromJson({
+    User userData = User.fromJson({
       'id': _dbUser.id,
       ...json,
     });
-    return user;
+    user = userData;
+    return ;
   }
 
   Future<bool> checkPhoneNumberIsDuplicated(String phoneNumber) async {
@@ -39,14 +40,17 @@ class DatabaseController extends GetxController {
     return _getNameList.isEmpty;
   }
 
-  Future<void> makeUser(Map<String, dynamic> body) async {
+  Future<String> makeUser(Map<String, dynamic> body) async {
+    String? id;
     await _firestore.collection('user').add(body).then((value) {
+      id = value.id;
       user = User.fromJson({
         'id': value.id,
         ...body,
       });
       update();
     });
+    return id!;
   }
 
   Future<void> makeGathering(Map<String, dynamic> body) async {
@@ -79,5 +83,9 @@ class DatabaseController extends GetxController {
       gatheringList.add(Gathering.fromJson(body));
     }
     return gatheringList;
+  }
+
+  Future<void> updateUser(Map<String,dynamic> body) async{
+    await _firestore.collection('user').doc(user!.id).update(body);
   }
 }

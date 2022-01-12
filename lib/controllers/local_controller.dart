@@ -7,6 +7,7 @@ class LocalController extends GetxController {
   final String _phoneKey = 'phone';
   final String _nameKey = 'name';
   final String _universityKey = 'university';
+  final String _idKey = 'id';
 
   @override
   void onInit() async{
@@ -18,7 +19,12 @@ class LocalController extends GetxController {
     _sharedPreferences = await SharedPreferences.getInstance();
     update();
   }
-
+  Future<void> clearSharedPreferences()async{
+    if(_sharedPreferences == null){
+      await _setSharedPreferences();
+    }
+    await _sharedPreferences!.clear();
+  }
 
   Future<void> setPhone(String phoneNumber) async{
     await _sharedPreferences!.setString(_phoneKey, phoneNumber);
@@ -51,5 +57,16 @@ class LocalController extends GetxController {
       await _setSharedPreferences();
     }
     return _sharedPreferences!.getString(_universityKey);
+  }
+
+  Future<void> setId(String id) async{
+    await _sharedPreferences!.setString(_idKey, id);
+  }
+
+  Future<String?> getId() async{
+    if(_sharedPreferences == null){
+      await _setSharedPreferences();
+    }
+    return _sharedPreferences!.getString(_idKey);
   }
 }

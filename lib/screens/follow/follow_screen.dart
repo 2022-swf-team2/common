@@ -5,7 +5,7 @@ import '../../constants.dart';
 import '../../models/user.dart';
 
 class FollowScreen extends StatelessWidget {
-  final List<User> followUserList;
+  final List followUserList;
   const FollowScreen({
     Key? key,
     required this.followUserList,
@@ -28,7 +28,7 @@ class FollowScreen extends StatelessWidget {
         ),
       ),
       body: ListView(
-        children: followUserList.map((User user) {
+        children: followUserList.map((user) {
           return Column(
             children: [
               UserInfo(

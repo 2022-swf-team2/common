@@ -102,12 +102,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-class RowCheck extends StatelessWidget {
-  const RowCheck({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row();
-  }
-}

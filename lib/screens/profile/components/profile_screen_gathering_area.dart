@@ -5,7 +5,7 @@ import '../../../models/gathering.dart';
 
 class ProfileScreenGatheringArea extends StatelessWidget {
   final String title;
-  final List<Gathering> gatheringList;
+  final List gatheringList;
   final Function onPressed;
   const ProfileScreenGatheringArea({
     Key? key,
@@ -54,7 +54,7 @@ class ProfileScreenGatheringArea extends StatelessWidget {
         Column(
           children: gatheringList
               .sublist(0, gatheringList.length > 3 ? 3 : gatheringList.length)
-              .map((Gathering gathering) {
+              .map((gathering) {
             return GatheringCard(
               gathering: gathering,
               userName: gathering.host.name,

@@ -21,7 +21,7 @@ class ProfileScreenEditScreenImageArea extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
-              image: AssetImage(imageUrl),
+              image: NetworkImage(imageUrl),
             ),
           ),
           child: Row(

@@ -1,4 +1,6 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'components/main_screen_bottom_navigation_bar.dart';
 import '../home/home_screen.dart';
 import '../follow/follow_screen.dart';
@@ -37,13 +39,13 @@ class _MainScreenState extends State<MainScreen> {
       case 1:
         //TODO List변환
         return FollowScreen(
-          followUserList: _userController.userList,
+          followUserList: DatabaseController.to.user!.likeUser,
         );
       case 2:
         return HomeScreen(university: _userUniversity);
       case 4:
         return UserScreen(
-          user: _userController.userList[0],
+          user: DatabaseController.to.user!,
         );
       default:
         return Container();

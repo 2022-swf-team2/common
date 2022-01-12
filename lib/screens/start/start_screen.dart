@@ -1,3 +1,6 @@
+import 'package:common/controllers/database_controller.dart';
+import 'package:common/controllers/local_controller.dart';
+import 'package:common/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../sign/sign_screen.dart';
@@ -6,8 +9,20 @@ import '../../constants.dart';
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key}) : super(key: key);
 
+  void _checkUserSignedIn() async{
+    String? _userId = await(LocalController.to.getId());
+    if(_userId != null){
+      DatabaseController.to.getUser(_userId).then((value){
+        Get.to(()=>const MainScreen());
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+_checkUserSignedIn();
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

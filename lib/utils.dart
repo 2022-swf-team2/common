@@ -16,7 +16,7 @@ List<String> getDateTime(String openTime, String endTime) {
   }
   int _hours =
       DateTime.parse(endTime).difference(DateTime.parse(openTime)).inHours;
-  _returnDate.add('${_openDate[1]}~${_endDate[1]}');
+  _returnDate.add('${_openDate[1].substring(0,5)}~${_endDate[1].substring(0,5)}');
   _returnDate.add('$_hours시간');
   return _returnDate;
 }

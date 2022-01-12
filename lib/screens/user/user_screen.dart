@@ -1,3 +1,5 @@
+import 'package:common/controllers/database_controller.dart';
+import 'package:common/controllers/local_controller.dart';
 import 'package:common/models/gathering.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +18,6 @@ class UserScreen extends StatelessWidget {
     required this.user,
   }) : super(key: key);
 
-  final UserController _controller = UserController.to;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +39,14 @@ class UserScreen extends StatelessWidget {
               UserScreenContentCard(
                   text: '프로필 보기',
                   onPressed: () {
-                    Get.to(() => ProfileScreen(
-                          currentUserId: '1',
-                          user: _controller.userList[0],
-                          //TODO 팔로잉된 유저인가
-                          isFollowed: false,
-                        ));
+                    Get.to(
+                      () => ProfileScreen(
+                        currentUserId: DatabaseController.to.user!.id,
+                        user: DatabaseController.to.user!,
+                        //TODO 팔로잉된 유저인가
+                        isFollowed: false,
+                      ),
+                    );
                   }),
               const UserScreenContentTitle(title: '모임 정보'),
               UserScreenContentCard(

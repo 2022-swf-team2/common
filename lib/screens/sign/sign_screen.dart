@@ -1,5 +1,6 @@
 import 'package:common/constants.dart';
 import 'package:common/controllers/database_controller.dart';
+import 'package:common/controllers/local_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../main/main_screen.dart';
@@ -16,8 +17,6 @@ class SignScreen extends StatefulWidget {
 }
 
 class _SignScreenState extends State<SignScreen> {
-  final DatabaseController _controller = DatabaseController.to;
-
   int _currentIndex = 0;
   final TextEditingController _phoneNumberEditingController =
       TextEditingController();
@@ -107,7 +106,8 @@ class _SignScreenState extends State<SignScreen> {
                   'likeGathering': [],
                   'likeUser': [],
                 };
-                await _controller.makeUser(body).then((value) {
+                await DatabaseController.to.makeUser(body).then((value) async {
+                  await LocalController.to.setId(value);
                   Get.offAll(
                     () => const MainScreen(),
                   );

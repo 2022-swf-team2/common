@@ -21,19 +21,17 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   int _filterIndex = 0;
-
-  final GatheringController _gatheringController = GatheringController.to;
   List<Gathering> _gatheringList = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _gatheringController
+    GatheringController.to
         .setCategoryGatheringList(widget.category)
         .then((value) {
       setState(() {
-        _gatheringList = _gatheringController.categoryGatheringList;
+        _gatheringList = GatheringController.to.categoryGatheringList;
       });
     });
   }

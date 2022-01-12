@@ -1,3 +1,4 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'gathering_card_info.dart';
@@ -43,7 +44,7 @@ class GatheringCard extends StatelessWidget {
         //TODO isHost의 기능이 결국 내가 호스트인가에 대한 bool값을 리턴
         Get.to(() => DetailScreen(
               gathering: gathering,
-              isHost: gathering.host.userId == '1',
+              isHost: gathering.host.userId == DatabaseController.to.user!.id,
             ));
       },
       child: Container(
@@ -67,7 +68,7 @@ class GatheringCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: AssetImage(userImageUrl),
+                        image: NetworkImage(userImageUrl),
                       ),
                     ),
                   ),

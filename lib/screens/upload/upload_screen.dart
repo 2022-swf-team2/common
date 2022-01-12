@@ -28,11 +28,7 @@ class UploadScreen extends StatefulWidget {
 }
 
 class _UploadScreenState extends State<UploadScreen> {
-  final DatabaseController _controller = DatabaseController.to;
-
   User? user;
-  final UserController _userController = UserController.to;
-
   //Title 관련
   final TextEditingController _titleController = TextEditingController();
   final FocusNode _titleFocusNode = FocusNode();
@@ -60,12 +56,13 @@ class _UploadScreenState extends State<UploadScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    user = _userController.userList[0];
+    user = DatabaseController.to.user!;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: kWhiteColor,
         foregroundColor: kGreyColor,
@@ -180,11 +177,11 @@ class _UploadScreenState extends State<UploadScreen> {
           //TODO 등록하기
           Map<String, dynamic> body = {
             'host': {
-              'userId':_controller.user!.id,
-              'name':_controller.user!.name,
-              'imageUrl':_controller.user!.imageUrl,
-              'job':_controller.user!.job,
-              'userTagList':_controller.user!.userTagList,
+              'userId':DatabaseController.to.user!.id,
+              'name':DatabaseController.to.user!.name,
+              'imageUrl':DatabaseController.to.user!.imageUrl,
+              'job':DatabaseController.to.user!.job,
+              'userTagList':DatabaseController.to.user!.userTagList,
             },
             'over':false,
             'title':_titleController.text,
@@ -202,7 +199,7 @@ class _UploadScreenState extends State<UploadScreen> {
             'approvalList':[],
             'cancelList':[],
           };
-          await _controller.makeGathering(body).then((value) {
+          await DatabaseController.to.makeGathering(body).then((value) {
             Get.back();
           });
         },

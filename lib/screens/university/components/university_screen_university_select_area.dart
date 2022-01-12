@@ -1,4 +1,6 @@
 import 'package:common/constants.dart';
+import 'package:common/controllers/database_controller.dart';
+import 'package:common/controllers/user_controller.dart';
 import 'package:common/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +10,8 @@ class UniversityScreenUniversitySelectArea extends StatelessWidget {
   final Function saveUniversity;
   const UniversityScreenUniversitySelectArea({
     Key? key,
-    required this.universityList, required this.saveUniversity,
+    required this.universityList,
+    required this.saveUniversity,
   }) : super(key: key);
 
   @override
@@ -17,11 +20,17 @@ class UniversityScreenUniversitySelectArea extends StatelessWidget {
       child: Column(
         children: universityList.map((university) {
           return GestureDetector(
-            onTap: () {
+            onTap: () async {
               //university in 서비스 지원 학교 => 성공로직으로
               if (university == '충남대학교' || university == '한국과학기술대학교') {
-                saveUniversity(university);
-                Get.off(()=>const MainScreen());
+                await saveUniversity(university);
+                await UserController.to
+                    .setUserUniversity(university)
+                    .then((value) {
+                  Get.off(
+                    () => const MainScreen()
+                  );
+                });
               } else {
                 showDialog(
                   context: context,
@@ -37,7 +46,7 @@ class UniversityScreenUniversitySelectArea extends StatelessWidget {
                       ),
                       actions: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Get.back();
                           },
                           child: Container(
@@ -83,7 +92,10 @@ class UniversityScreenUniversitySelectArea extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(university),
-                  const Icon(Icons.arrow_forward_ios,size: 15,),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 15,
+                  ),
                 ],
               ),
             ),

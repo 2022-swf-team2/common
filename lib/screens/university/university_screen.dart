@@ -12,7 +12,6 @@ class UniversityScreen extends StatefulWidget {
 }
 
 class _UniversityScreenState extends State<UniversityScreen> {
-  final LocalController _localController = LocalController.to;
   int _currentLocationListIndex = 0;
 
   @override
@@ -44,7 +43,7 @@ class _UniversityScreenState extends State<UniversityScreen> {
               universityList: kLocationList[_currentLocationListIndex]
                   ['university'],
               saveUniversity: (String university) {
-                _localController.setUniversity(university);
+                LocalController.to.setUniversity(university);
               },
             ),
           ),
