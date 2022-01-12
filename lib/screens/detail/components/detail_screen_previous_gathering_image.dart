@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetailScreenPreviousGatheringImage extends StatelessWidget {
-  final List<String> imageList;
+  final List imageList;
   const DetailScreenPreviousGatheringImage({
     Key? key,
     required this.imageList,
@@ -25,7 +25,7 @@ class DetailScreenPreviousGatheringImage extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: imageList.map((String imageUrl) {
+              children: imageList.map((imageUrl) {
                 return Container(
                   margin: const EdgeInsets.only(right: 10),
                   width: 100,

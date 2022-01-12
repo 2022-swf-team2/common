@@ -85,7 +85,7 @@ class _UploadScreenState extends State<UploadScreen> {
               imageUrl: user!.imageUrl,
               name: user!.name,
               job: user!.job,
-              hostTagList: user!.userTagList,
+              hostTagList: user!.userTagList ,
             ),
           ),
           Padding(

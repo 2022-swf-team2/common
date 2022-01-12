@@ -39,7 +39,7 @@ class StartScreen extends StatelessWidget {
           const SizedBox(height: 80),
           InkWell(
             onTap: (){
-              Get.to(()=>const SignScreen());
+              Get.off(()=>const SignScreen());
             },
             child: Container(
               alignment: Alignment.center,

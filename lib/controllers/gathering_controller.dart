@@ -43,10 +43,10 @@ class GatheringController extends GetxController {
         tagList: ['20대', '30대', '학과무관', '아무나', '다와라'],
         previousImageList: [],
         applyList: _userController.userList.map((User user){
-          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList);
+          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList );
         }).toList(),
         approvalList: _userController.userList.map((User user){
-          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList);
+          return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList );
         }).toList().sublist(0,2),
         cancelList: _userController.userList.map((User user){
           return Applicant(userId: user.id, name: user.name, imageUrl: user.imageUrl, job: user.job, userTagList: user.userTagList);

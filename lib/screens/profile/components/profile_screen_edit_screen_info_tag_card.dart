@@ -4,7 +4,7 @@ import '../../../components/gathering_card_tag.dart';
 
 class ProfileScreenEditScreenInfoTagCard extends StatelessWidget {
   final String title;
-  final List<String> tagList;
+  final List tagList;
   final Function onPressed;
   const ProfileScreenEditScreenInfoTagCard({
     Key? key,

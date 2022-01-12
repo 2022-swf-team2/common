@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../components/gathering_card_tag.dart';
 
 class DetailScreenGatheringHashTag extends StatelessWidget {
-  final List<String> tagList;
+  final List tagList;
   const DetailScreenGatheringHashTag({
     Key? key,
     required this.tagList,

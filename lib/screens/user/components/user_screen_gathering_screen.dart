@@ -31,17 +31,18 @@ class UserScreenGatheringScreen extends StatelessWidget {
       body: ListView(
         children: gatheringList.map((Gathering gathering) {
           return GatheringCard(
-              gathering: gathering,
-              userName: gathering.host.name,
-              userImageUrl: gathering.host.imageUrl,
-              userJob: gathering.host.job,
-              gatheringTitle: gathering.title,
-              gatheringParticipant: gathering.participant,
-              gatheringCapacity: gathering.capacity,
-              gatheringOpenTime: gathering.openTime,
-              gatheringEndTime: gathering.endTime,
-              gatheringPlace: gathering.locationDetail,
-              gatheringTagList: gathering.tagList);
+            gathering: gathering,
+            userName: gathering.host.name,
+            userImageUrl: gathering.host.imageUrl,
+            userJob: gathering.host.job,
+            gatheringTitle: gathering.title,
+            gatheringParticipant: gathering.participant,
+            gatheringCapacity: gathering.capacity,
+            gatheringOpenTime: gathering.openTime,
+            gatheringEndTime: gathering.endTime,
+            gatheringPlace: gathering.locationDetail,
+            gatheringTagList: gathering.tagList,
+          );
         }).toList(),
       ),
     );

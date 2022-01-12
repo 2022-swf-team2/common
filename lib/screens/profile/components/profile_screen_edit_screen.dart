@@ -27,8 +27,6 @@ class ProfileScreenEditScreen extends StatefulWidget {
 
 class _ProfileScreenEditScreenState extends State<ProfileScreenEditScreen> {
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

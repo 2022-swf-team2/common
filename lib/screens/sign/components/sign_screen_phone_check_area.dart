@@ -1,3 +1,4 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
@@ -18,6 +19,8 @@ class SignScreenPhoneCheckArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DatabaseController _controller = DatabaseController.to;
+
     return Column(
       children: [
         const Text('휴대폰번호를 입력해주세요'),
@@ -62,9 +65,11 @@ class SignScreenPhoneCheckArea extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {
+              onTap: ()async {
                 if (enablePhoneNumber) {
-                  checkButtonPressed();
+                  if(await _controller.checkPhoneNumberIsDuplicated(controller.text)){
+                    checkButtonPressed();
+                  }
                 }
               },
               child: Container(

@@ -18,7 +18,7 @@ class GatheringCard extends StatelessWidget {
   final String gatheringOpenTime;
   final String gatheringEndTime;
   final String gatheringPlace;
-  final List<String> gatheringTagList;
+  final List gatheringTagList;
   const GatheringCard({
     Key? key,
     required this.gathering,

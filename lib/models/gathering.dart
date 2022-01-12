@@ -15,11 +15,11 @@ class Gathering {
   final String location;
   final String locationDetail;
   final String hostMessage;
-  final List<String> tagList;
-  final List<String> previousImageList;
-  final List<Applicant> applyList;
-  final List<Applicant> approvalList;
-  final List<Applicant> cancelList;
+  final List tagList;
+  final List previousImageList;
+  final List applyList;
+  final List approvalList;
+  final List cancelList;
 
   Gathering({
     required this.id,
@@ -41,7 +41,7 @@ class Gathering {
     required this.cancelList,
   });
 
-  factory Gathering.fromJson(Map<String, dynamic> json) => Gathering(
+  factory Gathering.fromJson(json) => Gathering(
         id: json['id'],
         host: Host.fromJson(json['host']),
         over: json['over'],
@@ -56,14 +56,14 @@ class Gathering {
         hostMessage: json['hostMessage'],
         tagList: json['tagList'],
         previousImageList: json['previousImageList'],
-        applyList: json['applyList'].map((Map<String, dynamic> applicant) {
+        applyList: json['applyList'].map((dynamic applicant) {
           return Applicant.fromJson(applicant);
         }).toList,
         approvalList:
-            json['approvalList'].map((Map<String, dynamic> applicant) {
+            json['approvalList'].map((dynamic applicant) {
           return Applicant.fromJson(applicant);
         }).toList,
-        cancelList: json['cancelList'].map((Map<String, dynamic> applicant) {
+        cancelList: json['cancelList'].map((dynamic applicant) {
           return Applicant.fromJson(applicant);
         }).toList,
       );
@@ -84,13 +84,13 @@ class Gathering {
       'hostMessage': hostMessage,
       'tagList': tagList,
       'previousImageList': previousImageList,
-      'applyList':applyList.map((Applicant applicant){
+      'applyList':applyList.map((applicant){
         return applicant.toMap();
       }).toList(),
-      'approvalList':approvalList.map((Applicant applicant){
+      'approvalList':approvalList.map((applicant){
         return applicant.toMap();
       }).toList(),
-      'cancelList':cancelList.map((Applicant applicant){
+      'cancelList':cancelList.map((applicant){
         return applicant.toMap();
       }).toList(),
     };

@@ -111,7 +111,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     ? DetailScreenGatheringApplicantsCheckButton(
                         onPressed: () {
                           Get.to(() =>
-                              ApplicantsScreen(gathering: widget.gathering));
+                              ApplicantsScreen(gathering: widget.gathering,),);
                         },
                       )
                     : Container(),
@@ -126,7 +126,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   hostMessage: widget.gathering.hostMessage,
                 ),
                 DetailScreenGatheringHashTag(
-                  tagList: widget.gathering.tagList,
+                  tagList: widget.gathering.tagList ,
                 ),
                 widget.gathering.previousImageList.isNotEmpty
                     ? DetailScreenPreviousGatheringImage(

@@ -1,3 +1,4 @@
+import 'package:common/models/gathering.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'components/user_screen_content_card.dart';
@@ -48,16 +49,25 @@ class UserScreen extends StatelessWidget {
               UserScreenContentCard(
                   text: '호스트로 주최한 모임',
                   onPressed: () {
-                    Get.to(() => UserScreenGatheringScreen(
+                    Get.to(
+                      () => UserScreenGatheringScreen(
                         title: '호스트로 주최한 모임',
-                        gatheringList: user.openGatheringList));
+                        gatheringList: user.openGatheringList.map((element) {
+                          return Gathering.fromJson(element);
+                        }).toList(),
+                      ),
+                    );
                   }),
               UserScreenContentCard(
                   text: '게스트로 참여한 모임',
                   onPressed: () {
-                    Get.to(() => UserScreenGatheringScreen(
-                        title: '게스트로 참여한 모임',
-                        gatheringList: user.applyGatheringList));
+                    Get.to(
+                      () => UserScreenGatheringScreen(
+                          title: '게스트로 참여한 모임',
+                          gatheringList: user.applyGatheringList.map((element) {
+                            return Gathering.fromJson(element);
+                          }).toList()),
+                    );
                   }),
               UserScreenContentCard(text: '참여한 모임 사진', onPressed: () {}),
               const UserScreenContentTitle(title: '어플정보'),

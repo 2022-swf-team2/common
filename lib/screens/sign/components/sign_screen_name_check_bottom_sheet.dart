@@ -15,7 +15,10 @@ class SignScreenNameCheckBottomSheet extends StatelessWidget {
     return SafeArea(
       child: GestureDetector(
         onTap: () {
-          onPressed();
+          if(nameChecked){
+            onPressed();
+          }
+
         },
         child: Container(
           alignment: Alignment.center,

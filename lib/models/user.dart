@@ -1,3 +1,5 @@
+import 'package:common/constants.dart';
+
 import 'gathering.dart';
 
 class User {
@@ -9,11 +11,11 @@ class User {
   String imageUrl;
   String instaId;
   String kakaoLinkUrl;
-  List<String> userTagList;
-  final List<Gathering> applyGatheringList;
-  final List<Gathering> openGatheringList;
-  final List<Gathering> likeGathering;
-  final List<User> likeUser;
+  List userTagList;
+  final List applyGatheringList;
+  final List openGatheringList;
+  final List likeGathering;
+  final List likeUser;
 
   User({
     required this.id,
@@ -31,7 +33,7 @@ class User {
     required this.likeUser,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory User.fromJson(json) => User(
         id: json['id'],
         phoneNumber: json['phoneNumber'],
         name: json['name'],
@@ -42,18 +44,18 @@ class User {
         kakaoLinkUrl: json['kakaoLinkUrl'],
         userTagList: json['userTagList'],
         applyGatheringList:
-            json['applyGatheringList'].map((Map<String, dynamic> gathering) {
+            json['applyGatheringList'].map((gathering) {
           return Gathering.fromJson(gathering);
         }).toList(),
         openGatheringList:
-            json['openGatheringList'].map((Map<String, dynamic> gathering) {
+            json['openGatheringList'].map((gathering) {
           return Gathering.fromJson(gathering);
         }).toList(),
         likeGathering:
-            json['likeGathering'].map((Map<String, dynamic> gathering) {
+            json['likeGathering'].map((gathering) {
           return Gathering.fromJson(gathering);
         }).toList(),
-        likeUser: json['likeUser'].map((Map<String, dynamic> user) {
+        likeUser: json['likeUser'].map((user) {
           return User.fromJson(user);
         }).toList(),
       );
@@ -68,16 +70,16 @@ class User {
       'userTagList': userTagList,
       'instaId': instaId,
       'kakaoLinkUrl': kakaoLinkUrl,
-      'applyGatheringList': applyGatheringList.map((Gathering gathering) {
+      'applyGatheringList': applyGatheringList.map((gathering) {
         return gathering.toMap();
       }).toList(),
-      'openGatheringList': openGatheringList.map((Gathering gathering) {
+      'openGatheringList': openGatheringList.map((gathering) {
         return gathering.toMap();
       }).toList(),
-      'likeGathering': likeGathering.map((Gathering gathering) {
+      'likeGathering': likeGathering.map((gathering) {
         return gathering.toMap();
       }).toList(),
-      'likeUser': likeUser.map((User user) {
+      'likeUser': likeUser.map((user) {
         return user.toMap();
       }).toList(),
     };

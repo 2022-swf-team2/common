@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../main/main_screen.dart';
@@ -14,6 +16,8 @@ class SignScreen extends StatefulWidget {
 }
 
 class _SignScreenState extends State<SignScreen> {
+  final DatabaseController _controller = DatabaseController.to;
+
   int _currentIndex = 0;
   final TextEditingController _phoneNumberEditingController =
       TextEditingController();
@@ -88,8 +92,10 @@ class _SignScreenState extends State<SignScreen> {
             )
           : SignScreenNameCheckBottomSheet(
               nameChecked: _nameChecked,
-              onPressed: () {
-                Get.to(() => const MainScreen());
+              onPressed: () async{
+                bool isOk = await _controller.checkPhoneNumberIsDuplicated(_phoneNumberEditingController.text);
+                print(isOk);
+                // Get.to(() => const MainScreen());
               }),
     );
   }

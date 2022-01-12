@@ -56,17 +56,18 @@ class ProfileScreenGatheringArea extends StatelessWidget {
               .sublist(0, gatheringList.length > 3 ? 3 : gatheringList.length)
               .map((Gathering gathering) {
             return GatheringCard(
-                gathering: gathering,
-                userName: gathering.host.name,
-                userImageUrl: gathering.host.imageUrl,
-                userJob: gathering.host.job,
-                gatheringTitle: gathering.title,
-                gatheringParticipant: gathering.participant,
-                gatheringCapacity: gathering.capacity,
-                gatheringOpenTime: gathering.openTime,
-                gatheringEndTime: gathering.endTime,
-                gatheringPlace: gathering.locationDetail,
-                gatheringTagList: gathering.tagList);
+              gathering: gathering,
+              userName: gathering.host.name,
+              userImageUrl: gathering.host.imageUrl,
+              userJob: gathering.host.job,
+              gatheringTitle: gathering.title,
+              gatheringParticipant: gathering.participant,
+              gatheringCapacity: gathering.capacity,
+              gatheringOpenTime: gathering.openTime,
+              gatheringEndTime: gathering.endTime,
+              gatheringPlace: gathering.locationDetail,
+              gatheringTagList: gathering.tagList,
+            );
           }).toList(),
         ),
       ],

@@ -6,7 +6,7 @@ class ApplicantsScreenApplicantCardInfo extends StatelessWidget {
   final String imageUrl;
   final String name;
   final String job;
-  final List<String> userTagList;
+  final List userTagList;
   final bool followed;
   const ApplicantsScreenApplicantCardInfo({
     Key? key,

@@ -3,7 +3,7 @@ class Host {
   final String name;
   final String imageUrl;
   final String job;
-  final List<String> userTagList;
+  final List userTagList;
   Host( {
     required this.userId,
     required this.name,
@@ -12,7 +12,7 @@ class Host {
     required this.userTagList,
   });
 
-  factory Host.fromJson(Map<String, dynamic> json) => Host(
+  factory Host.fromJson(json) => Host(
     userId: json['userId'],
     name: json['name'],
     imageUrl: json['imageUrl'],

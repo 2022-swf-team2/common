@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GatheringCardTag extends StatelessWidget {
-  final List<String> tagList;
+  final List tagList;
   const GatheringCardTag({
     Key? key,
     required this.tagList,

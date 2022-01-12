@@ -3,7 +3,7 @@ class Applicant {
   final String name;
   final String imageUrl;
   final String job;
-  final List<String> userTagList;
+  final List userTagList;
   Applicant({
     required this.userId,
     required this.name,
@@ -12,7 +12,7 @@ class Applicant {
     required this.userTagList,
   });
 
-  factory Applicant.fromJson(Map<String, dynamic> json) => Applicant(
+  factory Applicant.fromJson(json) => Applicant(
         userId: json['userId'],
         name: json['name'],
         imageUrl: json['imageUrl'],

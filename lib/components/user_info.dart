@@ -6,7 +6,7 @@ class UserInfo extends StatelessWidget {
   final String imageUrl;
   final String name;
   final String job;
-  final List<String> hostTagList;
+  final List hostTagList;
   const UserInfo({
     Key? key,
     required this.imageUrl,

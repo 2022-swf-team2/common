@@ -20,12 +20,12 @@ class ApplicantsScreen extends StatefulWidget {
 class _ApplicantsScreenState extends State<ApplicantsScreen> {
   int _currentSelectIndex = 0;
   //TODO 실시간으로 보여줄때는 _applicantsList에서 removeAt/add 사용
-  List<Applicant> _applicantsList = [];
+  List _applicantsList = [];
 
   Widget _getApplicantsCard() {
     switch (_currentSelectIndex) {
       case 0:
-        _applicantsList = widget.gathering.applyList;
+        _applicantsList = widget.gathering.applyList ;
         break;
       case 1:
         _applicantsList = widget.gathering.approvalList;
@@ -35,7 +35,7 @@ class _ApplicantsScreenState extends State<ApplicantsScreen> {
     }
 
     return ListView(
-      children: _applicantsList.map((Applicant applicant) {
+      children: _applicantsList.map((applicant) {
         return ApplicantsScreenApplicantCard(
           applicant: applicant,
           followed: false,
