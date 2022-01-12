@@ -1,7 +1,6 @@
 import 'package:common/controllers/user_controller.dart';
 import 'package:common/models/applicant.dart';
 import 'package:common/models/user.dart';
-
 import '../models/gathering.dart';
 import '../models/host.dart';
 import 'package:get/get.dart';

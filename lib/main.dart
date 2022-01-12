@@ -1,3 +1,4 @@
+import 'package:common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'screens/main/main_screen.dart';
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SWF team2',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: kGreyColor,
+        focusColor: kGreyColor,
       ),
       home: const MainScreen(),
     );

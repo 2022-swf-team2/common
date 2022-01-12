@@ -1,6 +1,8 @@
 import 'package:common/screens/category/components/category_screen_filter_button.dart';
+import 'package:common/screens/upload/upload_screen.dart';
 import 'package:common/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../constants.dart';
 import '../../components/gathering_card.dart';
 import '../../controllers/gathering_controller.dart';
@@ -115,7 +117,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(()=>UploadScreen(category: widget.category));
+        },
         backgroundColor: kYellowColor,
         foregroundColor: kWhiteColor,
         child: Container(

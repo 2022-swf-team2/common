@@ -34,7 +34,6 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(widget.isHost);
   }
 
   @override

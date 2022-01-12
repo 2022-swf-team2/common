@@ -2,12 +2,14 @@ import 'gathering.dart';
 
 class User {
   final String id;
-  final String phoneNumber;
-  final String name;
   final String university;
-  final String job;
-  final String imageUrl;
-  final List<String> userTagList;
+  String phoneNumber;
+  String name;
+  String job;
+  String imageUrl;
+  String instaId;
+  String kakaoLinkUrl;
+  List<String> userTagList;
   final List<Gathering> applyGatheringList;
   final List<Gathering> openGatheringList;
   final List<Gathering> likeGathering;
@@ -20,6 +22,8 @@ class User {
     required this.university,
     required this.job,
     required this.imageUrl,
+    required this.instaId,
+    required this.kakaoLinkUrl,
     required this.userTagList,
     required this.applyGatheringList,
     required this.openGatheringList,
@@ -34,17 +38,22 @@ class User {
         university: json['university'],
         job: json['job'],
         imageUrl: json['imageUrl'],
+        instaId: json['instaId'],
+        kakaoLinkUrl: json['kakaoLinkUrl'],
         userTagList: json['userTagList'],
-        applyGatheringList: json['applyGatheringList'].map((Map<String,dynamic> gathering){
+        applyGatheringList:
+            json['applyGatheringList'].map((Map<String, dynamic> gathering) {
           return Gathering.fromJson(gathering);
         }).toList(),
-        openGatheringList: json['openGatheringList'].map((Map<String,dynamic> gathering){
+        openGatheringList:
+            json['openGatheringList'].map((Map<String, dynamic> gathering) {
           return Gathering.fromJson(gathering);
         }).toList(),
-        likeGathering: json['likeGathering'].map((Map<String,dynamic> gathering){
+        likeGathering:
+            json['likeGathering'].map((Map<String, dynamic> gathering) {
           return Gathering.fromJson(gathering);
         }).toList(),
-        likeUser: json['likeUser'].map((Map<String,dynamic> user){
+        likeUser: json['likeUser'].map((Map<String, dynamic> user) {
           return User.fromJson(user);
         }).toList(),
       );
@@ -55,20 +64,50 @@ class User {
       'name': name,
       'university': university,
       'job': job,
-      'imageUrl':imageUrl,
+      'imageUrl': imageUrl,
       'userTagList': userTagList,
-      'applyGatheringList': applyGatheringList.map((Gathering gathering){
+      'instaId': instaId,
+      'kakaoLinkUrl': kakaoLinkUrl,
+      'applyGatheringList': applyGatheringList.map((Gathering gathering) {
         return gathering.toMap();
       }).toList(),
-      'openGatheringList': openGatheringList.map((Gathering gathering){
+      'openGatheringList': openGatheringList.map((Gathering gathering) {
         return gathering.toMap();
       }).toList(),
-      'likeGathering': likeGathering.map((Gathering gathering){
+      'likeGathering': likeGathering.map((Gathering gathering) {
         return gathering.toMap();
       }).toList(),
-      'likeUser': likeUser.map((User user){
+      'likeUser': likeUser.map((User user) {
         return user.toMap();
       }).toList(),
     };
+  }
+
+  void setUserName(String newName) {
+    name = newName;
+  }
+
+  void setUserPhoneNumber(String newPhoneNumber) {
+    phoneNumber = newPhoneNumber;
+  }
+
+  void setUserImageUrl(String newImageUrl) {
+    imageUrl = newImageUrl;
+  }
+
+  void setUserJob(String newJob) {
+    job = newJob;
+  }
+
+  void setUserTagList(List<String> newTagList) {
+    userTagList = newTagList;
+  }
+
+  void setUserInstaId(String newId) {
+    instaId = newId;
+  }
+
+  void setUserKakaoLinkUrl(String newKakaoLinkUrl) {
+    kakaoLinkUrl = newKakaoLinkUrl;
   }
 }

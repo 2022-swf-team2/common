@@ -83,7 +83,7 @@ class UniversityScreenUniversitySelectArea extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(university),
-                  Icon(Icons.arrow_forward_ios,size: 15,),
+                  const Icon(Icons.arrow_forward_ios,size: 15,),
                 ],
               ),
             ),

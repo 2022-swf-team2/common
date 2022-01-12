@@ -43,3 +43,11 @@ List<Gathering> getListWithFilter(List<Gathering> gatheringList, int filter) {
       return _gatheringList;
   }
 }
+
+String getTime(int time){
+  if(time<10){
+    return '0$time';
+  }else{
+    return '$time';
+  }
+}

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 const Color kWhiteColor = Color(0xFFFAFAFA);
 const Color kBlackColor = Color(0xFF000000);
+final Color kBlackColorWithOpacity = const Color(0xFF000000).withOpacity(0.3);
+const Color kDeepBlueColor = Color(0xFF1D4EFF);
 const Color kBlueColor = Color(0xFF51B6FF);
 const Color kGreyColor = Color(0xFF979797);
 const Color kCategoryGreyColor = Color(0xFF747474);
@@ -10,6 +12,23 @@ const Color kRedColor = Color(0xFFFF0000);
 const Color kYellowColor = Color(0xFFFFB800);
 const Color kPinkColor = Color(0xFFFF7878);
 
+String noPersonImage = 'https://www.pinclipart.com/picdir/big/169-1695846_jane-no-one-icon-clipart.png';
+
+OutlineInputBorder kGreyOutlinedBorder = OutlineInputBorder(
+  borderSide:const  BorderSide(
+    color: kGreyColor,
+  ),
+  borderRadius: BorderRadius.circular(10.0),
+);
+
+OutlineInputBorder kFocusOutlinedBorder = OutlineInputBorder(
+  borderSide:const  BorderSide(
+    color: kBlackColor,
+    width: 1.5
+  ),
+  borderRadius: BorderRadius.circular(10.0),
+);
+const List<String> kWeekDay = ['일','월','화','수','목','금','토'] ;
 const List<String> kPhoneNumberList = [
   '010',
   '011',
@@ -139,22 +158,3 @@ final List<Map<String, dynamic>> kLocationList = [
 ];
 
 
-// GestureDetector(
-// onTap: () {
-// DatePicker.showDateTimePicker(
-// context,
-// showTitleActions: true,
-// locale: LocaleType.ko,
-// minTime: _startTime,
-// maxTime: DateTime(2023, 1, 5,13),
-// onChanged: (DateTime date) {
-// print(date);
-// },
-// );
-// },
-// child: Container(
-// padding: const EdgeInsets.all(40),
-// color: Colors.red,
-// child: Text('지도선택하기'),
-// ),
-// ),
