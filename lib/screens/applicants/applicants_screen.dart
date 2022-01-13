@@ -1,6 +1,7 @@
 import 'package:common/components/user_gathering_status.dart';
 import 'package:common/controllers/database_controller.dart';
 import 'package:common/controllers/gathering_controller.dart';
+import 'package:common/models/applicant.dart';
 import 'package:common/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,9 +49,25 @@ class _ApplicantsScreenState extends State<ApplicantsScreen> {
           updateFunction: () async {
             await DatabaseController.to
                 .getCurrentUser(DatabaseController.to.user!.id);
-            await GatheringController.to.updateGathering();
-            //TODO 여기서 보일지안보일지 체크
-            Get.offAll(()=>const MainScreen());
+            setState(() {});
+          },
+          approveFunction: () async{
+            await  DatabaseController.to.userApproveGathering(widget.gathering.id, applicant.userId);
+            widget.gathering.approvalList.add(applicant);
+            widget.gathering.applyList.remove(applicant);
+          },
+          removeInApprovalFunction: () async{
+            await  DatabaseController.to.removeUserInApprovalList(widget.gathering.id, applicant.userId);
+            widget.gathering.approvalList.remove(applicant);
+          },
+          cancelApproveFunction: ()async{
+           await  DatabaseController.to.cancelApproveUser(widget.gathering.id, applicant.userId);
+            widget.gathering.approvalList.remove(applicant);
+            widget.gathering.cancelList.remove(applicant);
+          },
+          cancelDeleteFunction: ()async{
+            await  DatabaseController.to.cancelDeleteUser(widget.gathering.id, applicant.userId);
+            widget.gathering.cancelList.remove(applicant);
           },
         );
       }).toList(),

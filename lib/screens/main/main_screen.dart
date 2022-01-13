@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void updateScreen() async {
-    await GatheringController.to.updateGathering();
+    await GatheringController.to.setGatheringList();
     await DatabaseController.to.getCurrentUser(DatabaseController.to.user!.id);
     setState(() {});
   }

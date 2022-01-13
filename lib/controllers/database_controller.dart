@@ -14,6 +14,22 @@ class DatabaseController extends GetxController {
 
   User? user;
 
+
+  Future<String?> getUserWithPhoneNumber(String phone)async{
+    QuerySnapshot<Map<String, dynamic>> _userData = await _firestore.collection('user').where('phoneNumber',isEqualTo: phone).get();
+    if(_userData.docs.isEmpty){
+      return null;
+    }
+    Map<String,dynamic> _user = {
+      'id':_userData.docs[0].id,
+      ..._userData.docs[0].data(),
+    };
+
+    user = User.fromJson(_user);
+    update();
+    return _userData.docs[0].id;
+  }
+
   Future<void> getCurrentUser(String id) async {
     DocumentSnapshot<Map<String, dynamic>> _dbUser =
         await (_firestore.collection('user').doc(id).get());
@@ -205,6 +221,7 @@ class DatabaseController extends GetxController {
     DocumentSnapshot<Map<String, dynamic>> _gatheringData =
         await _firestore.collection('gathering').doc(gatheringId).get();
     List _approvalList = _gatheringData['approvalList'];
+
     _approvalList
         .removeWhere((applicant) => applicant['userId'] == applicantId);
 

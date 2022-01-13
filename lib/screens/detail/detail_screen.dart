@@ -48,14 +48,6 @@ class _DetailScreenState extends State<DetailScreen> {
         return;
       }
     }
-    for (int i = 0; i < widget.gathering.approvalList.length; i++) {
-      if (widget.gathering.approvalList[i].userId == id) {
-        setState(() {
-          _userStateIndex = 2;
-        });
-        return;
-      }
-    }
     for (int i = 0; i < widget.gathering.cancelList.length; i++) {
       if (widget.gathering.cancelList[i].userId == id) {
         setState(() {
@@ -64,6 +56,15 @@ class _DetailScreenState extends State<DetailScreen> {
         return;
       }
     }
+    for (int i = 0; i < widget.gathering.approvalList.length; i++) {
+      if (widget.gathering.approvalList[i].userId == id) {
+        setState(() {
+          _userStateIndex = 2;
+        });
+        return;
+      }
+    }
+
   }
 
   @override
@@ -190,15 +191,19 @@ class _DetailScreenState extends State<DetailScreen> {
             )
           : DetailScreenUserBottomBar(
               chatPressed: () {},
-              applyPressed: () async{
-await DatabaseController.to.userApplyGathering(widget.gathering.id).then((value){
-  setState(() {
-    _userStateIndex = 1;
-  });
-});
+              applyPressed: () async {
+                await DatabaseController.to
+                    .userApplyGathering(widget.gathering.id)
+                    .then((value) {
+                  setState(() {
+                    _userStateIndex = 1;
+                  });
+                });
               },
-              cancelPressed: () async{
-                await DatabaseController.to.userCancelGathering(widget.gathering.id).then((value){
+              cancelPressed: () async {
+                await DatabaseController.to
+                    .userCancelGathering(widget.gathering.id)
+                    .then((value) {
                   setState(() {
                     _userStateIndex = 3;
                   });

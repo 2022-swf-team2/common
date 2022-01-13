@@ -17,9 +17,9 @@ class Gathering {
   final String hostMessage;
   final List tagList;
   final List previousImageList;
-  final List applyList;
-  final List approvalList;
-  final List cancelList;
+  List applyList;
+  List approvalList;
+  List cancelList;
 
   Gathering({
     required this.id,

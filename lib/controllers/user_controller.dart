@@ -7,16 +7,9 @@ class UserController extends GetxController {
   //여기서 유저데이터 관리 - 서버로부터 받은 데이터
   static UserController get to => Get.find();
 
-  List<User> _userList = [];
-  List<User> get userList => _userList;
   @override
   void onInit() {
     super.onInit();
-    setUserList();
-  }
-
-  Future<void> setUserList() async {
-    _userList = (await DatabaseController.to.getUserDocs()) ?? [];
   }
 
   Future<void> setUserUniversity(String newUniversity) async {
@@ -54,7 +47,6 @@ class UserController extends GetxController {
   Future<void> setUserInstaId(String newInstaId) async {
     Map<String, dynamic> _body = {'instaId': newInstaId};
     await DatabaseController.to.updateUser(_body);
-    return;
   }
 
   Future<void> setUserKakaoLinkUrl(String newKakaoLinkUrl) async {

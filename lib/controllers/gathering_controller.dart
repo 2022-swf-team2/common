@@ -3,7 +3,6 @@ import '../models/gathering.dart';
 import 'package:get/get.dart';
 
 class GatheringController extends GetxController {
-  final DatabaseController _databaseController = DatabaseController.to;
   static GatheringController get to => Get.find();
 
   List<Gathering> _gatheringList = [];
@@ -32,9 +31,4 @@ class GatheringController extends GetxController {
     }
     update();
   }
-  Future<void> updateGathering()async{
-    _gatheringList = await _databaseController.getGatheringDocs()??[];
-    update();
-  }
-
 }

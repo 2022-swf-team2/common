@@ -28,7 +28,7 @@ class _EditNameScreenState extends State<EditNameScreen> {
         onPressed: () async {
           if (isChecked) {
             await UserController.to.setUserName(_controller.text);
-            widget.user.setUserName(_controller.text);
+          widget.user.setUserName(_controller.text);
           }
         },
       ),

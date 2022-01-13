@@ -1,6 +1,7 @@
 import 'package:common/controllers/database_controller.dart';
 import 'package:common/controllers/local_controller.dart';
 import 'package:common/screens/main/main_screen.dart';
+import 'package:common/screens/start/components/start_screen_sign_in_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../sign/sign_screen.dart';
@@ -53,6 +54,24 @@ class StartScreen extends StatelessWidget {
           InkWell(
             onTap: () {
               Get.off(() => const SignScreen());
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              width: double.infinity,
+              color: kGreyColor,
+              child: const Text(
+                '휴대폰 회원가입하기',
+                style: TextStyle(
+                  color: kWhiteColor,
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Get.bottomSheet(StartScreenSignInBottomSheet());
             },
             child: Container(
               alignment: Alignment.center,
