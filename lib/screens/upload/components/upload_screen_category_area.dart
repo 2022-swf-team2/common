@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'upload_screen_icon_text.dart';
 
 class UploadScreenCategoryArea extends StatelessWidget {
-  const UploadScreenCategoryArea({Key? key}) : super(key: key);
+  final String category;
+  const UploadScreenCategoryArea({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        Padding(
+      children: [
+        const Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Text(
             '카테고리',
@@ -18,7 +19,7 @@ class UploadScreenCategoryArea extends StatelessWidget {
           ),
         ),
         UploadScreenIconText(
-          title: '스터디',
+          title: category,
           icon: Icons.local_library,
         ),
       ],

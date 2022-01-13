@@ -190,7 +190,9 @@ class _DetailScreenState extends State<DetailScreen> {
             )
           : DetailScreenUserBottomBar(
               chatPressed: () {},
-              applyPressed: () {},
+              applyPressed: () {
+
+              },
               cancelPressed: () {},
               userStateIndex: _userStateIndex,
             ),

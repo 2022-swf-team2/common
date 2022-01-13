@@ -22,15 +22,17 @@ class _UploadScreenLocationSearchScreenState
     List _result = await _connectController.getDataWithKakaoApi(text);
     List<Widget> _listTileList = [];
     for (int i = 0; i < _result.length; i++) {
-      _listTileList.add(GestureDetector(
-        onTap: () {
-          Get.back(result: _result[i]['address_name']);
-        },
-        child: ListTile(
-          title: Text(_result[i]['place_name']),
-          subtitle: Text(_result[i]['address_name']),
+      _listTileList.add(
+        GestureDetector(
+          onTap: () {
+            Get.back(result: _result[i]['address_name']);
+          },
+          child: ListTile(
+            title: Text(_result[i]['place_name']),
+            subtitle: Text(_result[i]['address_name']),
+          ),
         ),
-      ));
+      );
     }
     setState(() {
       _resultCard = _listTileList;

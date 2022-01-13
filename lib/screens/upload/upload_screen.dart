@@ -1,5 +1,6 @@
 import 'package:common/controllers/database_controller.dart';
 import 'package:common/models/gathering.dart';
+import 'package:common/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/user_info.dart';
@@ -96,7 +97,9 @@ class _UploadScreenState extends State<UploadScreen> {
                   controller: _titleController,
                   focusNode: _titleFocusNode,
                 ),
-                const UploadScreenCategoryArea(),
+                UploadScreenCategoryArea(
+                  category:widget.category,
+                ),
                 UploadScreenGuestArea(
                     guestCount: _guestCount,
                     onChanged: (double value) {
@@ -215,7 +218,6 @@ class _UploadScreenState extends State<UploadScreen> {
             );
             return;
           }
-          //TODO 등록하기
           Map<String, dynamic> body = {
             'host': {
               'userId': DatabaseController.to.user!.id,
@@ -241,8 +243,8 @@ class _UploadScreenState extends State<UploadScreen> {
             'cancelList': [],
             'timeStamp': DateTime.now().toString(),
           };
-          await DatabaseController.to.makeGathering(body).then((value) {
-            Get.back();
+          await DatabaseController.to.makeGathering(body).then((value){
+            Get.offAll(()=>const MainScreen());
           });
         },
       ),

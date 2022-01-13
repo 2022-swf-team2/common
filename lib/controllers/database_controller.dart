@@ -17,7 +17,9 @@ class DatabaseController extends GetxController {
   Future<void> getCurrentUser(String id) async {
     DocumentSnapshot<Map<String, dynamic>> _dbUser =
         await (_firestore.collection('user').doc(id).get());
-
+    if(_dbUser.data() == null){
+      return;
+    }
     Map<String, dynamic> json = _dbUser.data()!;
     User userData = User.fromJson({
       'id': _dbUser.id,

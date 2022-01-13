@@ -48,6 +48,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    LocalController.to.clearSharedPreferences();
     return Scaffold(
       body: _getMainScreen(),
       bottomNavigationBar: MainScreenBottomNavigationBar(
