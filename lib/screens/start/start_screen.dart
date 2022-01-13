@@ -9,20 +9,18 @@ import '../../constants.dart';
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key}) : super(key: key);
 
-  void _checkUserSignedIn() async{
-    String? _userId = await(LocalController.to.getId());
-    if(_userId != null){
-      DatabaseController.to.getCurrentUser(_userId).then((value){
-        Get.to(()=>const MainScreen());
+  void _checkUserSignedIn() async {
+    String? _userId = await (LocalController.to.getId());
+    if (_userId != null) {
+      DatabaseController.to.getCurrentUser(_userId).then((value) {
+        Get.to(() => const MainScreen());
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
-_checkUserSignedIn();
-
+    _checkUserSignedIn();
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -53,8 +51,8 @@ _checkUserSignedIn();
           ),
           const SizedBox(height: 80),
           InkWell(
-            onTap: (){
-              Get.off(()=>const SignScreen());
+            onTap: () {
+              Get.off(() => const SignScreen());
             },
             child: Container(
               alignment: Alignment.center,

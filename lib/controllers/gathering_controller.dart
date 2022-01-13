@@ -20,10 +20,10 @@ class GatheringController extends GetxController {
 
   Future<void> setGatheringList() async {
     _gatheringList = (await DatabaseController.to.getGatheringDocs()) ?? [];
+    update();
   }
 
   Future<void> setCategoryGatheringList(String category) async {
-    //여기서 데이터 가져온후 세팅완료되면 그때 다음페이지로 넘어가주기
     _categoryGatheringList = [];
     for (Gathering gathering in _gatheringList) {
       if (category == '전체보기' || gathering.category == category) {
@@ -32,9 +32,9 @@ class GatheringController extends GetxController {
     }
     update();
   }
-
-  Future<void> updateList() async {
-    _databaseController.getGatheringDocs();
-    _databaseController.getUserDocs();
+  Future<void> updateGathering()async{
+    _gatheringList = await _databaseController.getGatheringDocs()??[];
+    update();
   }
+
 }

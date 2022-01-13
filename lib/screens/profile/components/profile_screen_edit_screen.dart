@@ -30,20 +30,13 @@ class ProfileScreenEditScreen extends StatefulWidget {
 }
 
 class _ProfileScreenEditScreenState extends State<ProfileScreenEditScreen> {
-  bool isLoading = false;
   final picker = ImagePicker();
   Future<void> updateImage() async {
     XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile == null) return;
     File image = File(pickedFile.path);
-    setState(() {
-      isLoading = true;
-    });
     await DatabaseController.to.updateImage(image).then((value) async {
       DatabaseController.to.user!.imageUrl = value!;
-    });
-    setState(() {
-      isLoading = false;
     });
     return;
   }
@@ -77,40 +70,38 @@ class _ProfileScreenEditScreenState extends State<ProfileScreenEditScreen> {
             ProfileScreenEditScreenImageArea(
               imageUrl: widget.user.imageUrl,
               updateImage: () async {
-                if (!isLoading) {
-                  await updateImage().then((value) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          title: const Text('이미지 등록 완료'),
-                          actions: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.back();
-                              },
+                await updateImage().then((value) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        title: const Text('이미지 등록 완료'),
+                        actions: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(bottom: 20),
                               child: Container(
-                                padding: const EdgeInsets.only(bottom: 20),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  child: const Text(
-                                    '닫기',
-                                    style: TextStyle(
-                                      color: kBlueColor,
-                                    ),
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  '닫기',
+                                  style: TextStyle(
+                                    color: kBlueColor,
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        );
-                      },
-                    );
-                  });
-                }
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                });
                 setState(() {});
               },
             ),

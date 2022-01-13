@@ -1,34 +1,51 @@
+import 'package:common/controllers/database_controller.dart';
+import 'package:common/models/gathering.dart';
+import 'package:common/models/user.dart';
+import 'package:common/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'applicants_screen_applicant_card_info.dart';
 import '../../../models/applicant.dart';
 import '../../../constants.dart';
 
 class ApplicantsScreenApplicantCard extends StatelessWidget {
+  final Gathering gathering;
   final Applicant applicant;
   final bool followed;
   final int currentIndex;
+  final Function updateFunction;
   const ApplicantsScreenApplicantCard({
     Key? key,
+    required this.gathering,
     required this.applicant,
     required this.followed,
-    required this.currentIndex,
+    required this.currentIndex, required this.updateFunction,
   }) : super(key: key);
 
-  Widget _getButton(){
-    switch(currentIndex){
+  Widget _getButton() {
+    switch (currentIndex) {
       case 0:
         return Expanded(
-          child: Container(
-            alignment: Alignment.center,
-            height: 40,
-            decoration: BoxDecoration(
-              color: kBlueColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Text(
-              '승인 완료',
-              style: TextStyle(
-                color: kWhiteColor,
+          child: InkWell(
+            onTap: () async {
+              await DatabaseController.to
+                  .userApproveGathering(gathering.id, applicant.userId);
+              updateFunction();
+
+
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 40,
+              decoration: BoxDecoration(
+                color: kBlueColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text(
+                '승인 완료',
+                style: TextStyle(
+                  color: kWhiteColor,
+                ),
               ),
             ),
           ),
@@ -76,7 +93,6 @@ class ApplicantsScreenApplicantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         ApplicantsScreenApplicantCardInfo(
@@ -89,22 +105,36 @@ class ApplicantsScreenApplicantCard extends StatelessWidget {
         Row(
           children: [
             const SizedBox(width: 10),
-_getButton(),
+            _getButton(),
             const SizedBox(width: 10),
             Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                height: 40,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: kGreyColor,
+              child: GestureDetector(
+                onTap: () async {
+                  User user =
+                      await DatabaseController.to.getUser(applicant.userId);
+                  bool isFollowed = DatabaseController.to.user!.likeUser.contains(user);
+                  Get.to(
+                    () => ProfileScreen(
+                      currentUserId: DatabaseController.to.user!.id,
+                      user: user,
+                      isFollowed: isFollowed,
+                    ),
+                  );
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: kGreyColor,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  '상세보기',
-                  style: TextStyle(
-                    color: kGreyColor,
+                  child: const Text(
+                    '상세보기',
+                    style: TextStyle(
+                      color: kGreyColor,
+                    ),
                   ),
                 ),
               ),

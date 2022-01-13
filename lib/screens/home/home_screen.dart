@@ -10,24 +10,18 @@ import '../../components/gathering_card.dart';
 
 class HomeScreen extends StatefulWidget {
   final String university;
-  const HomeScreen({Key? key, required this.university}) : super(key: key);
+  const HomeScreen({
+    Key? key,
+    required this.university,
+  }) : super(key: key);
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GatheringController _gatheringController = GatheringController.to;
-  List<Gathering> _gatheringList = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _gatheringList = _gatheringController.gatheringList;
-
-  }
 
   Widget _getGatheringCard(List<Gathering> list) {
-    _gatheringController.updateList();
+    GatheringController.to.updateGathering();
     return Column(
       children: list.map((Gathering gathering) {
         return GatheringCard(
@@ -91,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              _getGatheringCard(_gatheringList),
+              _getGatheringCard(GatheringController.to.gatheringList),
             ],
           ),
         ],

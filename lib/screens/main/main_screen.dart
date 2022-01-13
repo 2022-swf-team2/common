@@ -1,4 +1,5 @@
 import 'package:common/controllers/database_controller.dart';
+import 'package:common/controllers/gathering_controller.dart';
 import 'package:flutter/material.dart';
 import 'components/main_screen_bottom_navigation_bar.dart';
 import '../home/home_screen.dart';
@@ -14,7 +15,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   String _userUniversity = '';
   int _currentScreenIndex = 2;
 
@@ -22,6 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _getUserUniversity();
+    updateScreen();
   }
 
   void _getUserUniversity() async {
@@ -46,9 +47,14 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
+  void updateScreen() async {
+    await GatheringController.to.updateGathering();
+    await DatabaseController.to.getCurrentUser(DatabaseController.to.user!.id);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    LocalController.to.clearSharedPreferences();
     return Scaffold(
       body: _getMainScreen(),
       bottomNavigationBar: MainScreenBottomNavigationBar(

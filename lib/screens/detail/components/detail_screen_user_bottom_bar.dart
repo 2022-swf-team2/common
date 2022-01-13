@@ -50,7 +50,7 @@ class DetailScreenUserBottomBar extends StatelessWidget {
                 if(userStateIndex == 0){
                   applyPressed();
                 }else if(userStateIndex == 2){
-
+                  cancelPressed();
                 }
 
               },

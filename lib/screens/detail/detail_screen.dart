@@ -190,10 +190,20 @@ class _DetailScreenState extends State<DetailScreen> {
             )
           : DetailScreenUserBottomBar(
               chatPressed: () {},
-              applyPressed: () {
-
+              applyPressed: () async{
+await DatabaseController.to.userApplyGathering(widget.gathering.id).then((value){
+  setState(() {
+    _userStateIndex = 1;
+  });
+});
               },
-              cancelPressed: () {},
+              cancelPressed: () async{
+                await DatabaseController.to.userCancelGathering(widget.gathering.id).then((value){
+                  setState(() {
+                    _userStateIndex = 3;
+                  });
+                });
+              },
               userStateIndex: _userStateIndex,
             ),
     );

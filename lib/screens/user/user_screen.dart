@@ -1,6 +1,5 @@
 import 'package:common/controllers/database_controller.dart';
 import 'package:common/controllers/local_controller.dart';
-import 'package:common/models/gathering.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'components/user_screen_content_card.dart';
@@ -12,7 +11,7 @@ import '../../models/user.dart';
 
 class UserScreen extends StatelessWidget {
   final User user;
-  UserScreen({
+  const UserScreen({
     Key? key,
     required this.user,
   }) : super(key: key);
@@ -54,9 +53,7 @@ class UserScreen extends StatelessWidget {
                     Get.to(
                       () => UserScreenGatheringScreen(
                         title: '호스트로 주최한 모임',
-                        gatheringList: user.openGatheringList.map((element) {
-                          return Gathering.fromJson(element);
-                        }).toList(),
+                        gatheringList: user.openGatheringList,
                       ),
                     );
                   }),
@@ -66,10 +63,8 @@ class UserScreen extends StatelessWidget {
                     Get.to(
                       () => UserScreenGatheringScreen(
                           title: '게스트로 참여한 모임',
-                          gatheringList: user.applyGatheringList.map((element) {
-                            return Gathering.fromJson(element);
-                          }).toList()),
-                    );
+                          gatheringList: user.applyGatheringList,
+                    ),);
                   }),
               UserScreenContentCard(text: '참여한 모임 사진', onPressed: () {}),
               const UserScreenContentTitle(title: '어플정보'),

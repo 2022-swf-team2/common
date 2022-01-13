@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../components/gathering_card.dart';
 import '../../../constants.dart';
-import '../../../models/gathering.dart';
 
 class UserScreenGatheringScreen extends StatelessWidget {
   final String title;
-  final List<Gathering> gatheringList;
+  final List gatheringList;
   const UserScreenGatheringScreen({
     Key? key,
     required this.title,
@@ -29,7 +28,7 @@ class UserScreenGatheringScreen extends StatelessWidget {
         ),
       ),
       body: ListView(
-        children: gatheringList.map((Gathering gathering) {
+        children: gatheringList.map((gathering) {
           return GatheringCard(
             gathering: gathering,
             userName: gathering.host.name,

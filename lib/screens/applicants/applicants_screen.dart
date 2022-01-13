@@ -1,5 +1,9 @@
 import 'package:common/components/user_gathering_status.dart';
+import 'package:common/controllers/database_controller.dart';
+import 'package:common/controllers/gathering_controller.dart';
+import 'package:common/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'components/applicants_screen_select_area.dart';
 import 'components/applicants_screen_applicant_card.dart';
 import '../../constants.dart';
@@ -24,21 +28,30 @@ class _ApplicantsScreenState extends State<ApplicantsScreen> {
   Widget _getApplicantsCard() {
     switch (_currentSelectIndex) {
       case 0:
-        _applicantsList = widget.gathering.applyList ;
+        _applicantsList = widget.gathering.applyList;
         break;
       case 1:
         _applicantsList = widget.gathering.approvalList;
         break;
       default:
         _applicantsList = widget.gathering.cancelList;
+        break;
     }
 
     return ListView(
       children: _applicantsList.map((applicant) {
         return ApplicantsScreenApplicantCard(
+          gathering: widget.gathering,
           applicant: applicant,
           followed: false,
           currentIndex: _currentSelectIndex,
+          updateFunction: () async {
+            await DatabaseController.to
+                .getCurrentUser(DatabaseController.to.user!.id);
+            await GatheringController.to.updateGathering();
+            //TODO 여기서 보일지안보일지 체크
+            Get.offAll(()=>const MainScreen());
+          },
         );
       }).toList(),
     );
