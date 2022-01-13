@@ -174,12 +174,9 @@ class DatabaseController extends GetxController {
     DocumentSnapshot<Map<String, dynamic>> _dbUser =
         await _firestore.collection('user').doc(user!.id).get();
     List _applyGatheringList = _dbUser['applyGatheringList'];
-    _applyGatheringList.add({
-      'id':gatheringId,
-      ...?_gatheringData.data()
-    });
+    _applyGatheringList.add({'id': gatheringId, ...?_gatheringData.data()});
     await _firestore.collection('user').doc(user!.id).update({
-      'applyGatheringList':_applyGatheringList,
+      'applyGatheringList': _applyGatheringList,
     });
     return;
   }
@@ -223,7 +220,8 @@ class DatabaseController extends GetxController {
     DocumentSnapshot<Map<String, dynamic>> _applicantData =
         await _firestore.collection('user').doc(applicantId).get();
     List _applyGatheringList = _applicantData['applyGatheringList'];
-    _applyGatheringList.add(_gatheringData.data()!);
+    _applyGatheringList
+        .add({'id': _gatheringData.id, ..._gatheringData.data()!});
 
     await _firestore
         .collection('user')
@@ -254,10 +252,10 @@ class DatabaseController extends GetxController {
         .removeWhere((applicant) => applicant['userId'] == applicantId);
     _cancelList.removeWhere((applicant) => applicant['userId'] == applicantId);
 
-    await _firestore
-        .collection('gathering')
-        .doc(gatheringId)
-        .update({'approvalList': _approvalList, 'cancelList': _cancelList});
+    await _firestore.collection('gathering').doc(gatheringId).update({
+      'approvalList': _approvalList,
+      'cancelList': _cancelList,
+    });
   }
 
   Future<void> cancelDeleteUser(String gatheringId, String applicantId) async {
