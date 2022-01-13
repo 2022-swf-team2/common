@@ -1,3 +1,6 @@
+import 'package:common/controllers/database_controller.dart';
+import 'package:common/models/user.dart';
+import 'package:common/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../applicants/applicants_screen.dart';
@@ -32,7 +35,6 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -52,7 +54,6 @@ class _DetailScreenState extends State<DetailScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        //TODO userId == hostId일 경우에 보여주고 아니면 가린다
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
@@ -70,25 +71,39 @@ class _DetailScreenState extends State<DetailScreen> {
             child: ListView(
               children: [
                 UserInfo(
+                  userId: widget.gathering.host.userId,
                   imageUrl: widget.gathering.host.imageUrl,
                   name: widget.gathering.host.name,
                   job: widget.gathering.host.job,
                   hostTagList: widget.gathering.host.userTagList,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: kGreyColor,
+                GestureDetector(
+                  onTap: () async {
+                    User user = await DatabaseController.to
+                        .getUser(widget.gathering.host.userId);
+                    Get.to(
+                      () => ProfileScreen(
+                        currentUserId: DatabaseController.to.user!.id,
+                        user: user,
+                        isFollowed: false,
+                      ),
+                    );
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: kGreyColor,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    '상세보기',
-                    style: TextStyle(
-                      color: kGreyColor,
+                    child: const Text(
+                      '상세보기',
+                      style: TextStyle(
+                        color: kGreyColor,
+                      ),
                     ),
                   ),
                 ),

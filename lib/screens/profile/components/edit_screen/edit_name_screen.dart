@@ -1,3 +1,5 @@
+import 'package:common/controllers/user_controller.dart';
+
 import '../../../../constants.dart';
 import '../../../../models/user.dart';
 import 'edit_screen_appbar.dart';
@@ -23,8 +25,9 @@ class _EditNameScreenState extends State<EditNameScreen> {
     return Scaffold(
       appBar: EditScreenAppBar(
         title: '닉네임',
-        onPressed: () {
+        onPressed: () async {
           if (isChecked) {
+            await UserController.to.setUserName(_controller.text);
             widget.user.setUserName(_controller.text);
           }
         },

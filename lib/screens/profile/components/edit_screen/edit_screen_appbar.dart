@@ -36,8 +36,8 @@ class EditScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () {
-            onPressed();
+          onPressed: ()async {
+            await onPressed();
             Get.back(result: true);
           },
           child: const Text(

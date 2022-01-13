@@ -28,7 +28,7 @@ OutlineInputBorder kFocusOutlinedBorder = OutlineInputBorder(
   ),
   borderRadius: BorderRadius.circular(10.0),
 );
-const List<String> kWeekDay = ['일','월','화','수','목','금','토'] ;
+const List<String> kWeekDay = ['','월','화','수','목','금','토','일'] ;
 const List<String> kPhoneNumberList = [
   '010',
   '011',

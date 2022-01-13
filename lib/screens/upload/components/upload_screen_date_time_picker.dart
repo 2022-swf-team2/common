@@ -6,13 +6,13 @@ import '../../../constants.dart';
 class UploadScreenDateTimePicker extends StatelessWidget {
   final DateTime nowTime;
   final DateTime currentTime;
-  final Function onChanged;
+  final Function onSubmitted;
   final bool noEnd;
   const UploadScreenDateTimePicker({
     Key? key,
     required this.nowTime,
     required this.currentTime,
-    required this.onChanged,
+    required this.onSubmitted,
     required this.noEnd,
   }) : super(key: key);
 
@@ -28,9 +28,9 @@ class UploadScreenDateTimePicker extends StatelessWidget {
               locale: LocaleType.ko,
               minTime: nowTime,
               maxTime: DateTime(2022, 12, 31),
-              onChanged: (DateTime date) {
-                onChanged(date);
-              },
+              onConfirm: (DateTime date){
+                onSubmitted(date);
+              }
             );
           }
         },

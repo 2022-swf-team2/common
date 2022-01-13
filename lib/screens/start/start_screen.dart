@@ -12,7 +12,7 @@ class StartScreen extends StatelessWidget {
   void _checkUserSignedIn() async{
     String? _userId = await(LocalController.to.getId());
     if(_userId != null){
-      DatabaseController.to.getUser(_userId).then((value){
+      DatabaseController.to.getCurrentUser(_userId).then((value){
         Get.to(()=>const MainScreen());
       });
     }

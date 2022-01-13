@@ -32,6 +32,7 @@ class FollowScreen extends StatelessWidget {
           return Column(
             children: [
               UserInfo(
+                userId: user.id,
                 imageUrl: user.imageUrl,
                 name: user.name,
                 job: user.job,

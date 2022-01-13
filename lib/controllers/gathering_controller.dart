@@ -7,7 +7,6 @@ import '../models/host.dart';
 import 'package:get/get.dart';
 
 class GatheringController extends GetxController {
-
   final DatabaseController _databaseController = DatabaseController.to;
   static GatheringController get to => Get.find();
 
@@ -19,27 +18,26 @@ class GatheringController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     setGatheringList();
   }
 
-  Future<void> setGatheringList()async{
-    _gatheringList = (await DatabaseController.to.getGatheringDocs())??[];
+  Future<void> setGatheringList() async {
+    _gatheringList = (await DatabaseController.to.getGatheringDocs()) ?? [];
   }
 
   Future<void> setCategoryGatheringList(String category) async {
     //여기서 데이터 가져온후 세팅완료되면 그때 다음페이지로 넘어가주기
     _categoryGatheringList = [];
-    for(Gathering gathering in _gatheringList){
-      if(gathering.category == category){
+    for (Gathering gathering in _gatheringList) {
+      if (category == '전체보기' || gathering.category == category) {
         _categoryGatheringList.add(gathering);
       }
     }
     update();
   }
 
-  Future<void> updateList() async{
+  Future<void> updateList() async {
     _databaseController.getGatheringDocs();
     _databaseController.getUserDocs();
   }

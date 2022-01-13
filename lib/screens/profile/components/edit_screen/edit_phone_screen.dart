@@ -1,3 +1,5 @@
+import 'package:common/controllers/user_controller.dart';
+
 import '../../../../constants.dart';
 import '../../../../models/user.dart';
 import 'edit_screen_appbar.dart';
@@ -24,9 +26,9 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
     return Scaffold(
       appBar: EditScreenAppBar(
         title: '휴대폰 번호',
-        onPressed: () {
-          //TODO 여기서 서버에다가 저장해주기
-          if(isChecked){
+        onPressed: () async {
+          if (isChecked) {
+            await UserController.to.setUserPhoneNumber(_controller.text);
             widget.user.setUserPhoneNumber(_controller.text);
           }
         },

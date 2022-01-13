@@ -52,6 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: ListView(
         children: [
           UserInfo(
+            userId: widget.user.id,
             imageUrl: widget.user.imageUrl,
             name: widget.user.name,
             job: widget.user.job,

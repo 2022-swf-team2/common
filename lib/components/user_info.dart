@@ -3,12 +3,14 @@ import 'gathering_card_tag.dart';
 import '../constants.dart';
 
 class UserInfo extends StatelessWidget {
+  final String userId;
   final String imageUrl;
   final String name;
   final String job;
   final List hostTagList;
   const UserInfo({
     Key? key,
+    required this.userId,
     required this.imageUrl,
     required this.name,
     required this.job,
@@ -28,6 +30,7 @@ class UserInfo extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
             ),
           ),
         ),

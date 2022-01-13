@@ -24,7 +24,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getUserUniversity();
   }
@@ -37,7 +36,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget _getMainScreen() {
     switch (_currentScreenIndex) {
       case 1:
-        //TODO List변환
         return FollowScreen(
           followUserList: DatabaseController.to.user!.likeUser,
         );

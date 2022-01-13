@@ -1,3 +1,5 @@
+import 'package:common/controllers/user_controller.dart';
+
 import '../../../../constants.dart';
 import '../../../../models/user.dart';
 import 'edit_screen_appbar.dart';
@@ -15,7 +17,9 @@ class EditKakaoScreen extends StatelessWidget {
     return Scaffold(
       appBar: EditScreenAppBar(
         title: '카카오톡 링크',
-        onPressed: () {
+        onPressed: () async {
+          await UserController.to
+              .setUserKakaoLinkUrl('https://${_controller.text}');
           user.setUserKakaoLinkUrl('https://${_controller.text}');
         },
       ),

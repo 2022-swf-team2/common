@@ -41,7 +41,6 @@ class GatheringCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        //TODO isHost의 기능이 결국 내가 호스트인가에 대한 bool값을 리턴
         Get.to(() => DetailScreen(
               gathering: gathering,
               isHost: gathering.host.userId == DatabaseController.to.user!.id,

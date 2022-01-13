@@ -38,7 +38,7 @@ class UploadScreenDateTimeArea extends StatelessWidget {
               UploadScreenDateTimePicker(
                 nowTime: nowTime,
                 currentTime: openTime,
-                onChanged: (DateTime date) {
+                onSubmitted: (DateTime date) {
                   openPressed(date);
                 },
                 noEnd: false,
@@ -50,7 +50,7 @@ class UploadScreenDateTimeArea extends StatelessWidget {
               UploadScreenDateTimePicker(
                 nowTime: nowTime,
                 currentTime: endTime,
-                onChanged: (DateTime date) {
+                onSubmitted: (DateTime date) {
                   endPressed(date);
                 },
                 noEnd: noEnd,

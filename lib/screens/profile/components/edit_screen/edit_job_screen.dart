@@ -1,3 +1,5 @@
+import 'package:common/controllers/user_controller.dart';
+
 import '../../../../constants.dart';
 import '../../../../models/user.dart';
 import 'edit_screen_appbar.dart';
@@ -15,7 +17,8 @@ class EditJobScreen extends StatelessWidget {
     return Scaffold(
       appBar: EditScreenAppBar(
         title: '신상정보',
-        onPressed: () {
+        onPressed: () async {
+          await UserController.to.setUserJob(_controller.text);
           user.setUserJob(_controller.text);
         },
       ),

@@ -1,8 +1,8 @@
+import 'package:common/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import '../../../../constants.dart';
 import '../../../../models/user.dart';
 import 'edit_screen_appbar.dart';
-
 
 class EditInstaScreen extends StatelessWidget {
   final User user;
@@ -17,7 +17,8 @@ class EditInstaScreen extends StatelessWidget {
     return Scaffold(
       appBar: EditScreenAppBar(
         title: '인스타그램 ID',
-        onPressed: () {
+        onPressed: () async {
+          await UserController.to.setUserInstaId(_controller.text);
           user.setUserInstaId(_controller.text);
         },
       ),

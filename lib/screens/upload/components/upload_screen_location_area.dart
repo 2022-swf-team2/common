@@ -43,8 +43,8 @@ class UploadScreenLocationArea extends StatelessWidget {
               children: [
                 Text(
                   location != '' ? location : '장소를 설정해주세요',
-                  style: const TextStyle(
-                    color: kGreyColor,
+                  style: TextStyle(
+                    color: location != ''?kBlackColor:kGreyColor,
                     fontSize: 16,
                   ),
                 ),

@@ -1,3 +1,5 @@
+import 'package:common/controllers/user_controller.dart';
+
 import '../../../../components/gathering_card_tag.dart';
 import '../../../../constants.dart';
 import '../../../../models/user.dart';
@@ -23,7 +25,9 @@ class _EditTagScreenState extends State<EditTagScreen> {
     return Scaffold(
       appBar: EditScreenAppBar(
         title: '소개 해시태그',
-        onPressed: () {
+        onPressed: () async {
+          await UserController.to.setUserTagList(_tagList);
+
           widget.user.setUserTagList(_tagList);
         },
       ),

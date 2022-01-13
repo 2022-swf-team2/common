@@ -15,7 +15,6 @@ import 'components/upload_screen_location_area.dart';
 import 'components/upload_screen_location_search_screen.dart';
 import 'components/upload_screen_title_area.dart';
 
-
 class UploadScreen extends StatefulWidget {
   final String category;
   const UploadScreen({
@@ -54,7 +53,6 @@ class _UploadScreenState extends State<UploadScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     user = DatabaseController.to.user!;
   }
@@ -82,10 +80,11 @@ class _UploadScreenState extends State<UploadScreen> {
           Padding(
             padding: const EdgeInsets.all(5),
             child: UserInfo(
+              userId: user!.id,
               imageUrl: user!.imageUrl,
               name: user!.name,
               job: user!.job,
-              hostTagList: user!.userTagList ,
+              hostTagList: user!.userTagList,
             ),
           ),
           Padding(
@@ -124,12 +123,22 @@ class _UploadScreenState extends State<UploadScreen> {
                   },
                   openPressed: (DateTime date) {
                     setState(() {
-                      _openTime = date;
+                      if (_endTime.difference(date).inSeconds < 0) {
+                        _endTime = _openTime;
+                        _openTime = date;
+                      } else {
+                        _openTime = date;
+                      }
                     });
                   },
                   endPressed: (DateTime date) {
                     setState(() {
-                      _endTime = date;
+                      if (date.difference(_openTime).inSeconds < 0) {
+                        _endTime = _openTime;
+                        _openTime = date;
+                      } else {
+                        _endTime = date;
+                      }
                     });
                   },
                 ),
@@ -162,42 +171,74 @@ class _UploadScreenState extends State<UploadScreen> {
                     setState(() {
                       _gatheringTagList.add(tag);
                     });
-
                   },
                   tagList: _gatheringTagList,
                 ),
-
               ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: UploadScreenBottomBar(
-        uploadPressed: ()async {
+        uploadPressed: () async {
+          if(_titleController.text.isEmpty||_locationDetailController.text.isEmpty||_hostMessageController.text.isEmpty){
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  title: const Text('모두 입력해주세요!!'),
+                  actions: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            '닫기',
+                            style: TextStyle(
+                              color: kBlueColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+            return;
+          }
           //TODO 등록하기
           Map<String, dynamic> body = {
             'host': {
-              'userId':DatabaseController.to.user!.id,
-              'name':DatabaseController.to.user!.name,
-              'imageUrl':DatabaseController.to.user!.imageUrl,
-              'job':DatabaseController.to.user!.job,
-              'userTagList':DatabaseController.to.user!.userTagList,
+              'userId': DatabaseController.to.user!.id,
+              'name': DatabaseController.to.user!.name,
+              'imageUrl': DatabaseController.to.user!.imageUrl,
+              'job': DatabaseController.to.user!.job,
+              'userTagList': DatabaseController.to.user!.userTagList,
             },
-            'over':false,
-            'title':_titleController.text,
-            'category':widget.category,
-            'participant':0,
-            'capacity':_guestCount,
-            'openTime':_openTime.toString(),
-            'endTime':_noEndTime?'':_endTime.toString(),
-            'location':_location,
-            'locationDetail':_locationDetailController.text,
-            'hostMessage':_hostMessageController.text,
-            'tagList':_gatheringTagList,
-            'previousImageList':[],
-            'applyList':[],
-            'approvalList':[],
-            'cancelList':[],
+            'over': false,
+            'title': _titleController.text,
+            'category': widget.category,
+            'participant': 0,
+            'capacity': _guestCount,
+            'openTime': _openTime.toString(),
+            'endTime': _noEndTime ? '' : _endTime.toString(),
+            'location': _location,
+            'locationDetail': _locationDetailController.text,
+            'hostMessage': _hostMessageController.text,
+            'tagList': _gatheringTagList,
+            'previousImageList': [],
+            'applyList': [],
+            'approvalList': [],
+            'cancelList': [],
+            'timeStamp': DateTime.now().toString(),
           };
           await DatabaseController.to.makeGathering(body).then((value) {
             Get.back();

@@ -3,9 +3,11 @@ import '../../../constants.dart';
 
 class ProfileScreenEditScreenImageArea extends StatelessWidget {
   final String imageUrl;
+  final Function updateImage;
   const ProfileScreenEditScreenImageArea({
     Key? key,
     required this.imageUrl,
+    required this.updateImage,
   }) : super(key: key);
 
   @override
@@ -22,24 +24,30 @@ class ProfileScreenEditScreenImageArea extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
             ),
           ),
           child: Row(
             children: [
               Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: kBlackColorWithOpacity,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
+                child: GestureDetector(
+                  onTap: () async {
+                    await updateImage();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: kBlackColorWithOpacity,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
                     ),
-                  ),
-                  height: 30,
-                  child: const Text(
-                    '편집',
-                    style: TextStyle(color: kWhiteColor),
+                    height: 30,
+                    child: const Text(
+                      '편집',
+                      style: TextStyle(color: kWhiteColor),
+                    ),
                   ),
                 ),
               ),

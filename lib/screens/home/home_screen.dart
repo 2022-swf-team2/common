@@ -18,12 +18,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GatheringController _gatheringController = GatheringController.to;
-  final DatabaseController _databaseController = DatabaseController.to;
   List<Gathering> _gatheringList = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _gatheringList = _gatheringController.gatheringList;
 

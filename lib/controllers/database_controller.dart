@@ -1,15 +1,19 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/models/gathering.dart';
 import 'package:common/models/user.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 
 class DatabaseController extends GetxController {
   static DatabaseController get to => Get.find();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _firestorage = FirebaseStorage.instance;
 
   User? user;
 
-  Future<void> getUser(String id) async {
+  Future<void> getCurrentUser(String id) async {
     DocumentSnapshot<Map<String, dynamic>> _dbUser =
         await (_firestore.collection('user').doc(id).get());
 
@@ -20,6 +24,18 @@ class DatabaseController extends GetxController {
     });
     user = userData;
     return ;
+  }
+  Future<User> getUser(String id) async {
+    DocumentSnapshot<Map<String, dynamic>> _dbUser =
+    await (_firestore.collection('user').doc(id).get());
+
+    Map<String, dynamic> json = _dbUser.data()!;
+    User userData = User.fromJson({
+      'id': _dbUser.id,
+      ...json,
+    });
+
+    return userData;
   }
 
   Future<bool> checkPhoneNumberIsDuplicated(String phoneNumber) async {
@@ -87,5 +103,19 @@ class DatabaseController extends GetxController {
 
   Future<void> updateUser(Map<String,dynamic> body) async{
     await _firestore.collection('user').doc(user!.id).update(body);
+  }
+
+  Future<String?> updateImage(File file)async{
+    try{
+      String destination = 'images/${user!.id}/profileimage/';
+      final ref =_firestorage.ref(destination);
+      String downloadUrl = await (ref.putFile(file).snapshot.ref.getDownloadURL());
+      await _firestore.collection('user').doc(user!.id).update({
+        'imageUrl':downloadUrl,
+      });
+      return downloadUrl;
+    }on FirebaseException catch(e) {
+      return null;
+    }
   }
 }
