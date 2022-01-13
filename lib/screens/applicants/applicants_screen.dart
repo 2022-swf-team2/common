@@ -55,19 +55,28 @@ class _ApplicantsScreenState extends State<ApplicantsScreen> {
             await  DatabaseController.to.userApproveGathering(widget.gathering.id, applicant.userId);
             widget.gathering.approvalList.add(applicant);
             widget.gathering.applyList.remove(applicant);
+            setState(() {
+
+            });
           },
           removeInApprovalFunction: () async{
             await  DatabaseController.to.removeUserInApprovalList(widget.gathering.id, applicant.userId);
-            widget.gathering.approvalList.remove(applicant);
+            widget.gathering.approvalList.remove(applicant);setState(() {
+
+            });
           },
           cancelApproveFunction: ()async{
            await  DatabaseController.to.cancelApproveUser(widget.gathering.id, applicant.userId);
             widget.gathering.approvalList.remove(applicant);
-            widget.gathering.cancelList.remove(applicant);
+            widget.gathering.cancelList.remove(applicant);setState(() {
+
+           });
           },
           cancelDeleteFunction: ()async{
             await  DatabaseController.to.cancelDeleteUser(widget.gathering.id, applicant.userId);
-            widget.gathering.cancelList.remove(applicant);
+            widget.gathering.cancelList.remove(applicant);setState(() {
+
+            });
           },
         );
       }).toList(),

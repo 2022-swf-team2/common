@@ -70,8 +70,40 @@ class StartScreen extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {
-              Get.bottomSheet(StartScreenSignInBottomSheet());
+            onTap: ()async {
+              var result = await Get.bottomSheet(StartScreenSignInBottomSheet());
+              if(result == false){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      title: const Text('없는 번호입니다!'),
+                      actions: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: const Text(
+                                '닫기',
+                                style: TextStyle(
+                                  color: kBlueColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
             child: Container(
               alignment: Alignment.center,

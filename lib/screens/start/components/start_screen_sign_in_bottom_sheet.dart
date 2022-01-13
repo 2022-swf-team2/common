@@ -35,11 +35,14 @@ class StartScreenSignInBottomSheet extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: ()async{
-                  String? _id = await DatabaseController.to.getUserWithPhoneNumber(_phoneNumberController.text) ;
-                  if(_id != null){
+                onTap: () async {
+                  String? _id = await DatabaseController.to
+                      .getUserWithPhoneNumber(_phoneNumberController.text);
+                  if (_id != null) {
                     await LocalController.to.setId(_id);
-                    Get.offAll(()=>const MainScreen());
+                    Get.offAll(() => const MainScreen());
+                  } else {
+                    Get.back(result: false);
                   }
                 },
                 child: const Text(
@@ -56,7 +59,9 @@ class StartScreenSignInBottomSheet extends StatelessWidget {
             controller: _phoneNumberController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.phone,),
+              prefixIcon: Icon(
+                Icons.phone,
+              ),
             ),
           ),
         ],

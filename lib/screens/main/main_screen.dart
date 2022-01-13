@@ -50,11 +50,14 @@ class _MainScreenState extends State<MainScreen> {
   void updateScreen() async {
     await GatheringController.to.setGatheringList();
     await DatabaseController.to.getCurrentUser(DatabaseController.to.user!.id);
-    setState(() {});
+    setState(() {
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    updateScreen();
     return Scaffold(
       body: _getMainScreen(),
       bottomNavigationBar: MainScreenBottomNavigationBar(

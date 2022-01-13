@@ -1,4 +1,5 @@
 import 'package:common/controllers/database_controller.dart';
+import 'package:common/controllers/gathering_controller.dart';
 import 'package:common/models/user.dart';
 import 'package:common/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,15 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
+    updateScreen();
     checkUserStateIndex(DatabaseController.to.user!.id);
+
+  }
+
+  void updateScreen() async {
+    await GatheringController.to.setGatheringList();
+    await DatabaseController.to.getCurrentUser(DatabaseController.to.user!.id);
+    setState(() {});
   }
 
   void checkUserStateIndex(String id) {
