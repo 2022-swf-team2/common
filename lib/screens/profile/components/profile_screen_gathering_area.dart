@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../components/gathering_card.dart';
 import '../../../constants.dart';
-import '../../../models/gathering.dart';
 
 class ProfileScreenGatheringArea extends StatelessWidget {
   final String title;

@@ -1,9 +1,9 @@
 import 'package:common/controllers/database_controller.dart';
+import 'package:common/models/gathering.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/user_info.dart';
 import '../../constants.dart';
-import '../../controllers/user_controller.dart';
 import '../../models/user.dart';
 import 'components/upload_screen_bottom_bar.dart';
 import 'components/upload_screen_category_area.dart';
@@ -122,6 +122,7 @@ class _UploadScreenState extends State<UploadScreen> {
                     });
                   },
                   openPressed: (DateTime date) {
+                    print(date);
                     setState(() {
                       if (_endTime.difference(date).inSeconds < 0) {
                         _endTime = _openTime;

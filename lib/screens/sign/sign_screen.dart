@@ -105,6 +105,7 @@ class _SignScreenState extends State<SignScreen> {
                   'openGatheringList': [],
                   'likeGathering': [],
                   'likeUser': [],
+                  'timeStamp':DateTime.now().toString(),
                 };
                 await DatabaseController.to.makeUser(body).then((value) async {
                   await LocalController.to.setId(value);

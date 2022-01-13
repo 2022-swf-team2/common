@@ -28,6 +28,30 @@ OutlineInputBorder kFocusOutlinedBorder = OutlineInputBorder(
   ),
   borderRadius: BorderRadius.circular(10.0),
 );
+
+const List<Map<String,dynamic>> kDetailStateList = [
+  {
+    'guideLine':'',
+    'buttonText':'신청하기'
+  },
+  {
+    'guideLine':'모임에 신청중입니다',
+    'buttonText':'모임 신청중...'
+  },
+  {
+    'guideLine':'모임신청 승인되었습니다',
+    'buttonText':'모임신청 취소'
+  },
+  {
+    'guideLine':'취소 요청중입니다',
+    'buttonText':'취소 요청중...'
+  },
+  {
+    'guideLine':'모임이 취소되었습니다',
+    'buttonText':'모임 취소'
+  }
+];
+
 const List<String> kWeekDay = ['','월','화','수','목','금','토','일'] ;
 const List<String> kPhoneNumberList = [
   '010',

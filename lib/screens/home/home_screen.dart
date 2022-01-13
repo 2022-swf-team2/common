@@ -1,4 +1,3 @@
-import 'package:common/controllers/database_controller.dart';
 import 'package:common/screens/university/university_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

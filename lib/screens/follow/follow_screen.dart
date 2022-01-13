@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'components/follow_screen_card_button_area.dart';
 import '../../components/user_info.dart';
 import '../../constants.dart';
-import '../../models/user.dart';
 
 class FollowScreen extends StatelessWidget {
   final List followUserList;

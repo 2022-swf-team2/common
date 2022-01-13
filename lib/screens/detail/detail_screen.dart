@@ -13,7 +13,6 @@ import 'components/detail_screen_gathering_info_card.dart';
 import 'components/detail_screen_gathering_progress_bar.dart';
 import 'components/detail_screen_user_bottom_bar.dart';
 import 'components/detail_screen_gathering_hash_tag.dart';
-import 'components/detail_screen_gathering_place.dart';
 import 'components/detail_screen_gathering_place_info.dart';
 import 'components/detail_screen_previous_gathering_image.dart';
 import 'components/detail_screen_gathering_applicants_check_button.dart';
@@ -33,9 +32,38 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  int _userStateIndex = 0;
   @override
   void initState() {
     super.initState();
+    checkUserStateIndex(DatabaseController.to.user!.id);
+  }
+
+  void checkUserStateIndex(String id) {
+    for (int i = 0; i < widget.gathering.applyList.length; i++) {
+      if (widget.gathering.applyList[i].userId == id) {
+        setState(() {
+          _userStateIndex = 1;
+        });
+        return;
+      }
+    }
+    for (int i = 0; i < widget.gathering.approvalList.length; i++) {
+      if (widget.gathering.approvalList[i].userId == id) {
+        setState(() {
+          _userStateIndex = 2;
+        });
+        return;
+      }
+    }
+    for (int i = 0; i < widget.gathering.cancelList.length; i++) {
+      if (widget.gathering.cancelList[i].userId == id) {
+        setState(() {
+          _userStateIndex = 3;
+        });
+        return;
+      }
+    }
   }
 
   @override
@@ -63,10 +91,11 @@ class _DetailScreenState extends State<DetailScreen> {
         children: [
           widget.isHost
               ? Container()
-              : const UserGatheringStatus(
-                  //TODO 여기서 유저의 현재상태에 따라 어떤식의 text를 띄워줄지 정해야함
-                  content: '신청중입니다',
-                ),
+              : _userStateIndex == 0
+                  ? Container()
+                  : UserGatheringStatus(
+                      content: kDetailStateList[_userStateIndex]['guideLine'],
+                    ),
           Expanded(
             child: ListView(
               children: [
@@ -162,6 +191,8 @@ class _DetailScreenState extends State<DetailScreen> {
           : DetailScreenUserBottomBar(
               chatPressed: () {},
               applyPressed: () {},
+              cancelPressed: () {},
+              userStateIndex: _userStateIndex,
             ),
     );
   }

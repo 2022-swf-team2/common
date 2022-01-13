@@ -68,6 +68,7 @@ class GatheringCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                         image: NetworkImage(userImageUrl),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

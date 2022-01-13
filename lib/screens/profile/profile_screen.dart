@@ -6,7 +6,6 @@ import 'components/profile_screen_bottom_bar.dart';
 import 'components/profile_screen_edit_screen.dart';
 import '../../components/user_info.dart';
 import '../../constants.dart';
-import '../../controllers/gathering_controller.dart';
 import '../../models/user.dart';
 
 class ProfileScreen extends StatefulWidget {

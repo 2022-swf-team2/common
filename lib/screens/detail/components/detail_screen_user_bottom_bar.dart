@@ -4,10 +4,14 @@ import '../../../constants.dart';
 class DetailScreenUserBottomBar extends StatelessWidget {
   final Function chatPressed;
   final Function applyPressed;
+  final Function cancelPressed;
+  final int userStateIndex;
   const DetailScreenUserBottomBar({
     Key? key,
     required this.chatPressed,
     required this.applyPressed,
+    required this.cancelPressed,
+    required this.userStateIndex,
   }) : super(key: key);
 
   @override
@@ -43,16 +47,27 @@ class DetailScreenUserBottomBar extends StatelessWidget {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                applyPressed();
+                if(userStateIndex == 0){
+                  applyPressed();
+                }else if(userStateIndex == 2){
+
+                }
+
               },
               child: Container(
                 alignment: Alignment.center,
                 height: 40,
                 decoration: BoxDecoration(
-                    color: kBlueColor, borderRadius: BorderRadius.circular(10)),
-                child: const Text(
-                  '신청하기',
-                  style: TextStyle(
+                  color: userStateIndex == 0
+                      ? kBlueColor
+                      : userStateIndex == 2
+                          ? kRedColor
+                          : kGreyColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  kDetailStateList[userStateIndex]['buttonText'],
+                  style: const TextStyle(
                     color: kWhiteColor,
                   ),
                 ),

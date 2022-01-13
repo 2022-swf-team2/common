@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/models/applicant.dart';
 import 'package:common/models/gathering.dart';
 import 'package:common/models/user.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -70,7 +71,21 @@ class DatabaseController extends GetxController {
   }
 
   Future<void> makeGathering(Map<String, dynamic> body) async {
-    await _firestore.collection('gathering').add(body);
+    String? id;
+    await _firestore.collection('gathering').add(body).then((value){
+      id = value.id;
+    });
+    Map<String,dynamic> updateBody = {
+      'id':id,
+      ...body,
+    };
+    DocumentSnapshot<Map<String, dynamic>> _userData = await _firestore.collection('user').doc(user!.id).get();
+    List<dynamic> _openGatheringList = _userData['openGatheringList'];
+    _openGatheringList.add(updateBody);
+
+    await _firestore.collection('user').doc(user!.id).update({
+      'openGatheringList':_openGatheringList,
+    });
   }
 
   Future<List<User>?> getUserDocs() async {
@@ -106,16 +121,94 @@ class DatabaseController extends GetxController {
   }
 
   Future<String?> updateImage(File file)async{
-    try{
-      String destination = 'images/${user!.id}/profileimage/';
-      final ref =_firestorage.ref(destination);
-      String downloadUrl = await (ref.putFile(file).snapshot.ref.getDownloadURL());
-      await _firestore.collection('user').doc(user!.id).update({
-        'imageUrl':downloadUrl,
-      });
-      return downloadUrl;
-    }on FirebaseException catch(e) {
-      return null;
-    }
+    String destination = 'images/${user!.id}/profileimage/';
+    final ref =_firestorage.ref(destination);
+    String downloadUrl = await (ref.putFile(file).snapshot.ref.getDownloadURL());
+    await _firestore.collection('user').doc(user!.id).update({
+      'imageUrl':downloadUrl,
+    });
+    return downloadUrl;
+  }
+  //이용자 입장에서 필요 함수
+  Future<void> userApplyGathering(String gatheringId)async{
+    DocumentSnapshot<Map<String, dynamic>> _gatheringData = await _firestore.collection('gathering').doc(gatheringId).get();
+    List<Map<String,dynamic>> _applyList = _gatheringData['applyList'];
+    _applyList.add(
+      Applicant(
+        userId: user!.id,
+        name: user!.name,
+        imageUrl: user!.imageUrl,
+        job: user!.job,
+        userTagList: user!.userTagList,
+      ).toMap()
+    );
+    await _firestore.collection('gathering').doc(gatheringId).update({
+      'applyList':_applyList
+    });
+  }
+  Future<void> userCancelGathering(String gatheringId)async{
+    DocumentSnapshot<Map<String, dynamic>> _gatheringData = await _firestore.collection('gathering').doc(gatheringId).get();
+    List<Map<String,dynamic>> _cancelList = _gatheringData['cancelList'];
+    _cancelList.add(
+        Applicant(
+          userId: user!.id,
+          name: user!.name,
+          imageUrl: user!.imageUrl,
+          job: user!.job,
+          userTagList: user!.userTagList,
+        ).toMap()
+    );
+    await _firestore.collection('gathering').doc(gatheringId).update({
+      'cancelList':_cancelList
+    });
+  }
+
+  //주최자 입장에서 필요 함수
+  Future<void> userApproveGathering(String gatheringId,String applicantId)async{
+    DocumentSnapshot<Map<String, dynamic>> _gatheringData = await _firestore.collection('gathering').doc(gatheringId).get();
+
+    List<Map<String,dynamic>> _applyList = _gatheringData['applyList'];
+    int _index =_applyList.indexWhere((Map<String,dynamic> applicant)=>applicant['userId']==applicantId);
+
+    List<Map<String,dynamic>> _approvalList = _gatheringData['approvalList'];
+    _approvalList.add(_applyList[_index]);
+    _applyList.removeAt(_index);
+
+    await _firestore.collection('gathering').doc(gatheringId).update({
+      'approvalList':_approvalList,
+      'applyList':_applyList,
+    });
+  }
+  Future<void> removeUserInApprovalList(String gatheringId,String applicantId)async{
+    DocumentSnapshot<Map<String, dynamic>> _gatheringData = await _firestore.collection('gathering').doc(gatheringId).get();
+    List<Map<String,dynamic>> _approvalList = _gatheringData['approvalList'];
+    _approvalList.removeWhere((Map<String,dynamic> applicant)=>
+      applicant['userId']==applicantId
+    );
+
+    await _firestore.collection('gathering').doc(gatheringId).update({
+      'approvalList':_approvalList,
+    });
+  }
+  Future<void> cancelApproveUser(String gatheringId,String applicantId)async{
+    DocumentSnapshot<Map<String, dynamic>> _gatheringData = await _firestore.collection('gathering').doc(gatheringId).get();
+    List<Map<String,dynamic>> _approvalList = _gatheringData['approvalList'];
+    List<Map<String,dynamic>> _cancelList = _gatheringData['cancelList'];
+    _approvalList.removeWhere((Map<String,dynamic> applicant)=>applicant['userId']==applicantId);
+    _cancelList.removeWhere((Map<String,dynamic> applicant)=>applicant['userId']==applicantId);
+
+    await _firestore.collection('gathering').doc(gatheringId).update({
+      'approvalList':_approvalList,
+      'cancelList':_cancelList
+    });
+  }
+  Future<void> cancelDeleteUser(String gatheringId,String applicantId)async{
+    DocumentSnapshot<Map<String, dynamic>> _gatheringData = await _firestore.collection('gathering').doc(gatheringId).get();
+    List<Map<String,dynamic>> _cancelList = _gatheringData['cancelList'];
+    _cancelList.removeWhere((Map<String,dynamic> applicant)=>applicant['userId']==applicantId);
+
+    await _firestore.collection('gathering').doc(gatheringId).update({
+      'cancelList':_cancelList
+    });
   }
 }

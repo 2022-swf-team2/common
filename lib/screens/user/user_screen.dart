@@ -8,7 +8,6 @@ import 'components/user_screen_content_title.dart';
 import 'components/user_screen_gathering_screen.dart';
 import '../profile/profile_screen.dart';
 import '../../constants.dart';
-import '../../controllers/user_controller.dart';
 import '../../models/user.dart';
 
 class UserScreen extends StatelessWidget {
@@ -76,7 +75,9 @@ class UserScreen extends StatelessWidget {
               const UserScreenContentTitle(title: '어플정보'),
               UserScreenContentCard(text: '공지사항', onPressed: () {}),
               UserScreenContentCard(text: '1:1 문의', onPressed: () {}),
-              UserScreenContentCard(text: '이용약관', onPressed: () {}),
+              UserScreenContentCard(text: '이용약관', onPressed: () {
+                LocalController.to.clearSharedPreferences();
+              }),
               UserScreenContentCard(text: '친구 초대하기', onPressed: () {}),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),

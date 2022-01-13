@@ -1,12 +1,10 @@
 import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'components/main_screen_bottom_navigation_bar.dart';
 import '../home/home_screen.dart';
 import '../follow/follow_screen.dart';
 import '../user/user_screen.dart';
 import '../../controllers/local_controller.dart';
-import '../../controllers/user_controller.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -16,8 +14,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final LocalController _localController = LocalController.to;
-  final UserController _userController = UserController.to;
 
   String _userUniversity = '';
   int _currentScreenIndex = 2;
@@ -29,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _getUserUniversity() async {
-    _userUniversity = await (_localController.getUniversity()) ?? '충남대학교';
+    _userUniversity = await (LocalController.to.getUniversity()) ?? '충남대학교';
     setState(() {});
   }
 

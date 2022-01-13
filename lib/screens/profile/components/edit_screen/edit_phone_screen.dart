@@ -53,6 +53,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
                     decoration: InputDecoration(
                       suffixIcon: isChecked ? null : const Icon(Icons.clear),
                     ),
+                    keyboardType: TextInputType.number,
                   ),
                 ),
                 GestureDetector(
