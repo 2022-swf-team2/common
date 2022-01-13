@@ -14,14 +14,16 @@ class DatabaseController extends GetxController {
 
   User? user;
 
-
-  Future<String?> getUserWithPhoneNumber(String phone)async{
-    QuerySnapshot<Map<String, dynamic>> _userData = await _firestore.collection('user').where('phoneNumber',isEqualTo: phone).get();
-    if(_userData.docs.isEmpty){
+  Future<String?> getUserWithPhoneNumber(String phone) async {
+    QuerySnapshot<Map<String, dynamic>> _userData = await _firestore
+        .collection('user')
+        .where('phoneNumber', isEqualTo: phone)
+        .get();
+    if (_userData.docs.isEmpty) {
       return null;
     }
-    Map<String,dynamic> _user = {
-      'id':_userData.docs[0].id,
+    Map<String, dynamic> _user = {
+      'id': _userData.docs[0].id,
       ..._userData.docs[0].data(),
     };
 
@@ -155,6 +157,7 @@ class DatabaseController extends GetxController {
   Future<void> userApplyGathering(String gatheringId) async {
     DocumentSnapshot<Map<String, dynamic>> _gatheringData =
         await _firestore.collection('gathering').doc(gatheringId).get();
+
     List _applyList = _gatheringData['applyList'];
     _applyList.add(Applicant(
       userId: user!.id,
@@ -167,6 +170,18 @@ class DatabaseController extends GetxController {
         .collection('gathering')
         .doc(gatheringId)
         .update({'applyList': _applyList});
+
+    DocumentSnapshot<Map<String, dynamic>> _dbUser =
+        await _firestore.collection('user').doc(user!.id).get();
+    List _applyGatheringList = _dbUser['applyGatheringList'];
+    _applyGatheringList.add({
+      'id':gatheringId,
+      ...?_gatheringData.data()
+    });
+    await _firestore.collection('user').doc(user!.id).update({
+      'applyGatheringList':_applyGatheringList,
+    });
+    return;
   }
 
   Future<void> userCancelGathering(String gatheringId) async {

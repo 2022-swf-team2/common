@@ -64,7 +64,6 @@ class _DetailScreenState extends State<DetailScreen> {
         return;
       }
     }
-
   }
 
   @override
@@ -193,11 +192,9 @@ class _DetailScreenState extends State<DetailScreen> {
               chatPressed: () {},
               applyPressed: () async {
                 await DatabaseController.to
-                    .userApplyGathering(widget.gathering.id)
-                    .then((value) {
-                  setState(() {
-                    _userStateIndex = 1;
-                  });
+                    .userApplyGathering(widget.gathering.id);
+                setState(() {
+                  _userStateIndex = 1;
                 });
               },
               cancelPressed: () async {
