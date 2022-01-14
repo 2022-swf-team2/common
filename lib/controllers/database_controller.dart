@@ -147,10 +147,8 @@ class DatabaseController extends GetxController {
     final ref = _firestorage.ref(destination);
     String downloadUrl =
         await (ref.putFile(file).snapshot.ref.getDownloadURL());
-    await _firestore.collection('user').doc(user!.id).update({
-      'imageUrl': downloadUrl,
-    });
     return downloadUrl;
+
   }
 
   //이용자 입장에서 필요 함수

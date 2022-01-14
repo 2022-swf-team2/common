@@ -35,9 +35,13 @@ class _ProfileScreenEditScreenState extends State<ProfileScreenEditScreen> {
     XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile == null) return;
     File image = File(pickedFile.path);
-    await DatabaseController.to.updateImage(image).then((value) async {
-      DatabaseController.to.user!.imageUrl = value!;
-    });
+    String? _downloadUrl = await DatabaseController.to.updateImage(image);
+    if(_downloadUrl != null){
+      Map<String,String> body = {
+        'imageUrl':_downloadUrl
+      };
+      await DatabaseController.to.updateUser(body);
+    }
     return;
   }
 

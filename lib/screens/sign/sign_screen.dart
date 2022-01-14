@@ -17,6 +17,8 @@ class SignScreen extends StatefulWidget {
 }
 
 class _SignScreenState extends State<SignScreen> {
+  bool _isLoading = false;
+
   int _currentIndex = 0;
   final TextEditingController _phoneNumberEditingController =
       TextEditingController();
@@ -92,27 +94,32 @@ class _SignScreenState extends State<SignScreen> {
           : SignScreenNameCheckBottomSheet(
               nameChecked: _nameChecked,
               onPressed: () async {
-                Map<String, dynamic> body = {
-                  'name': _nameEditingController.text,
-                  'phoneNumber': _phoneNumberEditingController.text,
-                  'university': '충남대학교',
-                  'job': '',
-                  'imageUrl': noPersonImage,
-                  'instaId': '',
-                  'kakaoLinkUrl': '',
-                  'userTagList': [],
-                  'applyGatheringList': [],
-                  'openGatheringList': [],
-                  'likeGathering': [],
-                  'likeUser': [],
-                  'timeStamp':DateTime.now().toString(),
-                };
-                await DatabaseController.to.makeUser(body).then((value) async {
-                  await LocalController.to.setId(value);
-                  Get.offAll(
-                    () => const MainScreen(),
-                  );
-                });
+                if(_isLoading == false) {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  Map<String, dynamic> body = {
+                    'name': _nameEditingController.text,
+                    'phoneNumber': _phoneNumberEditingController.text,
+                    'university': '충남대학교',
+                    'job': '',
+                    'imageUrl': noPersonImage,
+                    'instaId': '',
+                    'kakaoLinkUrl': '',
+                    'userTagList': [],
+                    'applyGatheringList': [],
+                    'openGatheringList': [],
+                    'likeGathering': [],
+                    'likeUser': [],
+                    'timeStamp':DateTime.now().toString(),
+                  };
+                  await DatabaseController.to.makeUser(body).then((value) async {
+                    await LocalController.to.setId(value);
+                    Get.offAll(
+                          () => const MainScreen(),
+                    );
+                  });
+                }
               }),
     );
   }

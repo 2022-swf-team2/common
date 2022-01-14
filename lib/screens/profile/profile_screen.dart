@@ -1,3 +1,4 @@
+import 'package:common/components/user_screen_gathering_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'components/profile_screen_button_area.dart';
@@ -71,12 +72,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ProfileScreenGatheringArea(
             title: '호스트로 개최한 모임',
             gatheringList: widget.user.openGatheringList,
-            onPressed: () {},
+            onPressed: () {
+              Get.to(
+                    () => GatheringScreen(
+                  title: '호스트로 주최한 모임',
+                  gatheringList: widget.user.openGatheringList,
+                ),
+              );
+            },
           ),
           ProfileScreenGatheringArea(
             title: '게스트로 참여한 모임',
             gatheringList: widget.user.applyGatheringList,
-            onPressed: () {},
+            onPressed: () {
+              Get.to(
+                    () => GatheringScreen(
+                  title: '게스트로 참여한 모임',
+                  gatheringList: widget.user.openGatheringList,
+                ),
+              );
+            },
           ),
         ],
       ),

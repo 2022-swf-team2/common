@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'components/user_screen_content_card.dart';
 import 'components/user_screen_content_title.dart';
-import 'components/user_screen_gathering_screen.dart';
+import '../../components/user_screen_gathering_screen.dart';
 import '../profile/profile_screen.dart';
 import '../../constants.dart';
 import '../../models/user.dart';
@@ -51,7 +51,7 @@ class UserScreen extends StatelessWidget {
                   text: '호스트로 주최한 모임',
                   onPressed: () {
                     Get.to(
-                      () => UserScreenGatheringScreen(
+                      () => GatheringScreen(
                         title: '호스트로 주최한 모임',
                         gatheringList: user.openGatheringList,
                       ),
@@ -61,7 +61,7 @@ class UserScreen extends StatelessWidget {
                   text: '게스트로 참여한 모임',
                   onPressed: () {
                     Get.to(
-                      () => UserScreenGatheringScreen(
+                      () => GatheringScreen(
                           title: '게스트로 참여한 모임',
                           gatheringList: user.applyGatheringList,
                     ),);

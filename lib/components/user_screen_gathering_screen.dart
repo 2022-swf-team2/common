@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../components/gathering_card.dart';
-import '../../../constants.dart';
+import 'gathering_card.dart';
+import '../constants.dart';
 
-class UserScreenGatheringScreen extends StatelessWidget {
+class GatheringScreen extends StatelessWidget {
   final String title;
   final List gatheringList;
-  const UserScreenGatheringScreen({
+  const GatheringScreen({
     Key? key,
     required this.title,
     required this.gatheringList,
