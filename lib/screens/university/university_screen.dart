@@ -1,3 +1,4 @@
+import 'package:common/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import 'components/university_screen_location_select_area.dart';
 import 'components/university_screen_university_select_area.dart';
@@ -42,7 +43,11 @@ class _UniversityScreenState extends State<UniversityScreen> {
             child: UniversityScreenUniversitySelectArea(
               universityList: kLocationList[_currentLocationListIndex]
                   ['university'],
-              saveUniversity: (String university) {
+              saveUniversity: (String university) async{
+                Map<String,dynamic> body = {
+                  'university':university
+                };
+                await DatabaseController.to.updateUser(body);
                 LocalController.to.setUniversity(university);
               },
             ),

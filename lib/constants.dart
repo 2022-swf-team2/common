@@ -64,9 +64,11 @@ const List<String> kPhoneNumberList = [
 
 final List<String> kAdvertisementImageList = [
   'assets/images/cafe_1.jpeg',
-  'assets/images/exercise_1.jpeg',
   'assets/images/study_1.jpeg',
+  'assets/images/study_2.jpeg',
   'assets/images/travel_1.jpeg',
+  'assets/images/travel_2.jpeg',
+  'assets/images/exercise_1.jpeg',
 ];
 final List<Map<String,dynamic>> kCategoryList = [
   {

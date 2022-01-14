@@ -36,10 +36,8 @@ class _ProfileScreenEditScreenState extends State<ProfileScreenEditScreen> {
     if (pickedFile == null) return;
     File image = File(pickedFile.path);
     String? _downloadUrl = await DatabaseController.to.updateImage(image);
-    if(_downloadUrl != null){
-      Map<String,String> body = {
-        'imageUrl':_downloadUrl
-      };
+    if (_downloadUrl != null) {
+      Map<String, String> body = {'imageUrl': _downloadUrl};
       await DatabaseController.to.updateUser(body);
     }
     return;
@@ -75,6 +73,7 @@ class _ProfileScreenEditScreenState extends State<ProfileScreenEditScreen> {
               imageUrl: widget.user.imageUrl,
               updateImage: () async {
                 await updateImage().then((value) {
+                  setState(() {});
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {

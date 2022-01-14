@@ -19,7 +19,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   Widget _getGatheringCard(List<Gathering> list) {
     GatheringController.to.setGatheringList();
     return Column(
@@ -54,14 +53,25 @@ class _HomeScreenState extends State<HomeScreen> {
             Get.to(() => const UniversityScreen());
           },
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.university),
-              const SizedBox(width: 5),
-              const RotatedBox(
-                quarterTurns: 1,
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 15,
+              Row(
+                children: [
+                  Text(widget.university),
+                  const SizedBox(width: 5),
+                  const RotatedBox(
+                    quarterTurns: 1,
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 15,
+                    ),
+                  ),
+                ],
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.search,
                 ),
               ),
             ],

@@ -145,7 +145,7 @@ class DatabaseController extends GetxController {
   Future<String?> updateImage(File file) async {
     String destination = 'images/${user!.id}/profileimage/';
     final ref = _firestorage.ref(destination);
-    String downloadUrl =
+    String? downloadUrl =
         await (ref.putFile(file).snapshot.ref.getDownloadURL());
     return downloadUrl;
 
